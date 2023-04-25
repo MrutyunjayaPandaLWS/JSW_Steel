@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
+    <title>FAQ</title>
+    <style>
+        li {
+            font-family: 'Roboto Condensed';
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .tcpart {
+            padding: 0 0px;
+            margin-top: 64px;
+        }
+
+        h1.topheader {
+            font-size: 20px;
+            background: #ffffff;
+            padding: 20px 10px;
+            margin: 0;
+            text-align: center;
+            font-family: 'Roboto Condensed';
+            /* use project primary color */
+            color:#F37A21 ;
+            position: fixed;
+            width: 100%;
+            height: 64px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        h2,
+        h3,
+        p {
+            font-family: 'Roboto Condensed';
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: #ccc;
+            position: fixed;
+            top: 64px;
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: #F37A21;
+            /* use project primary color */
+            width: 0%;
+
+        }
+
+        button.accordion {
+                background-color: #fff;
+                color: #2b2b2b;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: 1px solid #00000012;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+                transition: 0.4s;
+                font-family: 'Roboto Condensed';
+                font-weight: 400;
+                border-bottom: none;
+            }
+        
+                button.accordion.active, button.accordion:hover {
+                    background-color: #ffffff;
+                    color: #020921;
+                    content: "\25b2";
+                    font-size: 18px;
+                }
+        
+            .accordion:after {
+                content: '\25bc';
+                color: rgb(255 255 255);
+                font-weight: 400;
+                float: right;
+                margin-left: 5px;
+                font-family: 'Roboto Condensed';
+            }
+        
+            .accordion.active:after {
+                content: "\25b2";
+                color: rgb(255, 255, 255);
+            }
+        
+            .panel {
+                padding: 1px 18px 0px 18px;
+                background-color: #e7e6e68f;
+                max-height: 0;
+                color: black;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+            }
+        
+            .faq {
+                background-color: #ffffff;
+            }
+        
+            .boxpading {
+                padding: 0 150px 0 150px;
+            }
+        
+            .gaptoall {
+                padding: 10px 0 10px 0;
+            }
+        
+            .title {
+                font-size: 70px;
+                margin: 0;
+                padding: 160px 0px 8px 80px;
+                color: #fff;
+                font-family: 'Roboto Condensed';
+            }
+        
+            .headingtag {
+                font-size: 30px;
+                margin: 0;
+                padding: 5px 0 25px 80px;
+                color: #fff;
+                font-family: 'Roboto Condensed';
+            }
+            .faqmsp{
+                color: #040a2d;
+                padding: 15px 0;
+                text-align: center;
+                font-size: 20px;
+                font-weight: 600;
+                font-family: 'Roboto Condensed';
+            }
+            .erflp{
+                font-size: 20px;
+                font-family: 'Roboto Condensed';
+                text-align: center;
+                padding: 18px 0;
+            }
+            p{
+                font-size: 13px;
+            }
+    </style>
+    <script>
+        // When the user scrolls the page, execute pageScroll function 
+        window.onscroll = function () {
+            pageScroll();
+        };
+
+        function pageScroll() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("proBar").style.width = scrolled + "%";
+        }
+    </script>
+  
+</head>
+
+<body>
+    <h1 class="topheader">Jindal Panther Loyalty Program - FAQs</h1><br>
+    <div class="progress-container">
+        <div class="progress-bar" id="proBar"></div>
+    </div>
+    <div class="tcpart">
+        <!-- Paste your t and c here-->
+        <div class="container">
+           <div class="row">
+
+               <div class="col-md-12">
+
+                   <!----------QA-01--------->
+                   <button class="accordion">What is Nirman- Jindal Panther Loyalty Program?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">Nirman- Jindal Panther is a rewards program designed for influencers of Jindal Steel and Power products. The program aims to recognize and reward the loyalty of Masons/Contractors/Architects etc who consistently promote Jindal Steel and Power products. Participants of the program will earn points through their purchases and other engagement activities, which can then be redeemed for exclusive rewards and benefits. The program will provide dealers with personalized experiences, offers and benefits, based on their purchase history and level of engagement with the brand. The program aims to strengthen the relationship between Jindal Steel and Power and its influencers, fostering loyalty and long-term partnerships’.</p>
+                   </div>
+                   <!----------QA-02--------->
+                   <button class="accordion">Who can join the program?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">Any Contractor/Mason/Architect/Engineer can join the program who is above 18 years old, is a resident of India and purchasing/influencing purchase of JSP Jindal Panther TMT Rebars from authorized JSP dealers.</p>
+                   </div>
+                   <!----------QA-03--------->
+                   <button class="accordion">How can I register in the program ?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">JSP team will contact you wherein the entire Nirman program will be explained to you. After understanding the program, you may share your details to get enrolled in the program. You may also contact your nearest JSP dealer who will help you get in touch with JSP team for enrolment.</p>
+                   </div>
+                   <!----------QA-04--------->
+                   <button class="accordion">How to earn points in the program?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">Earning point is very simple. After your construction site receives JSP TMT bars, please call helpline no. 1206688850 and share following details, date of purchase, name of dealer from where purchase is done, city, size and quantity. The request will be taken by the team and post verification by JSP team points will be credited into your account.</p>
+                   </div>
+                   <!----------QA-05--------->
+                   <button class="accordion">What can I get for my points?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">There are lot of options to choose from like electronic goods, kitchen appliances, household white goods, mobile phones, laptop etc. Options are given in the gift catalogue and will be updated from time to time</p>
+                   </div>
+                   <!----------QA-06--------->
+                   <button class="accordion">Can I choose gifts which aren’t mentioned in the catalogue?</button>
+                   <div class="panel" style="">
+                       <p class="gaptoall">Yes, you can. All you need to do is call our helpline no. 1206688850. Tell the exact details (like brand, model specifications etc.). Our team will get back to you with the points required for redemption. Upon accumulation of as many points in your account, redemption of your selected gift can be done.</p>
+                   </div>
+                   <!----------QA-07--------->
+                   <button class="accordion">Can I be associated with multiple dealers?</button>
+                   <div class="panel">
+                       <p class="gaptoall">At the time of enrolment, we will ask you the dealers with whom you are associated. You can share details of all the dealers you are associated with.</p>
+                   </div>
+                   <!----------QA-08--------->
+                   <button class="accordion">How can I check my accumulated points balance?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Log in to Nirman-Jindal Panther application and check point balance.</p>
+                   </div>
+                   <!----------QA-09--------->
+                   <button class="accordion">How can I redeem my points?</button>
+                   <div class="panel">
+                       <li class="gaptoall">Method 1 - Log in to Nirman-Jindal Panther application, go to ‘redeem points’, select an item from catalogue, provide address and contact details.</li>
+                       <li class="gaptoall">Method 2 - Call our helpline no. 1206688850 and register your request.</li>
+                   </div>
+                   <!----------QA-10--------->
+                   <button class="accordion">What are the minimum points required to initiate the redemption process?</button>
+                   <div class="panel">
+                       <p class="gaptoall">There are no minimum points required for redemption.</p>
+                   </div>
+                   <!----------QA-11--------->
+                   <button class="accordion">Can I redeem all the points in my balance?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Yes, entire points can be redeemed for gifts. No points would be withheld by JSP.</p>
+                   </div>
+                   <!----------QA-12--------->
+                   <button class="accordion">How much time would it take for the gift to be delivered to me once I initiate the redemption?</button>
+                   <div class="panel">
+                       <p class="gaptoall">The process for redemption will start as soon as you register your request. The gift will be dispatched within 30 days from date of redemption.</p>
+                   </div>
+                   <!----------QA-13--------->
+                   <button class="accordion">What are tiers in the program?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Based upon purchase volume banked in last 6 months, influencers are grouped in 4 tiers – Platinum (>35 tons), Gold (20-35 tons), Silver (5-20 tons) and Bronze (<5 tons but >0)</p>
+                   </div>
+                   <!----------QA-14--------->
+                   <button class="accordion">Can I upgrade my tier?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Absolutely yes. As soon as threshold level of current tier is crossed, from next month onwards the tier is changed to applicable tier. For e.g. If in the 1st month of enrollment itself, a contractor’s site purchases 7 tons of Jindal Panther TMT Rebars. From next month he will be in silver tier.</p>
+                   </div>
+                   <!----------QA-15--------->
+                   <button class="accordion">What are tier multiplier points?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Based upon the tier in which an influencer currently is, he gets bonus points in addition to the base points earned by him during a month. These are called tier multiplier points. These are calculated by multiplying tier multiplier with base points. Tier multiplier is 75% for Platinum Tier, 50% for Gold Tier, 25% for Silver Tier.</p>
+                   </div>
+                   <!----------QA-16--------->
+                   <button class="accordion">Do I also get accidental and health insurance in the program?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Accidental insurance is given to all influencers who are in bronze, silver, gold and platinum tier but the insurance cover varies from tier to tier. Health Insurance is given to influencers in Gold and Platinum Tiers only.</p>
+                   </div>
+                   <!----------QA-17--------->
+                   <button class="accordion">What are milestone benefits?</button>
+                   <div class="panel">
+                       <p class="gaptoall">Milestone gifts are those gifts which an influencer receives when he reaches a particular milestone of points. Point to be noted is that these gifts/benefits are given to influencer without deducting even a single point.</p>
+                   </div>
+                   <!----------QA-18--------->
+                   <button class="accordion">How will I be able to communicate any complaints that I have, related to ‘Nirman’?</button>
+                   <div class="panel">
+                       <p class="gaptoall">JSP Sales team will get in touch with you from time to time to help you move forward in the program and check if you need any help. However, if you need any help anytime w.r.t. Nirman program, feel free to call our helpline no. 1206688850 to register your complaint. JSP sales team will immediately contact you to solve your problem.</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
+
+
+</body>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    var firstAccordion = acc[0];
+    var firstPanel = firstAccordion.nextElementSibling;
+    firstAccordion.classList.add("active");
+    firstPanel.style.maxHeight = firstPanel.scrollHeight + "px";
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function () {
+
+            var isActive = this.classList.contains("active");
+
+            var allAccordions = document.getElementsByClassName("accordion");
+            for (j = 0; j < allAccordions.length; j++) {
+                allAccordions[j].classList.remove("active");
+
+                var panel = allAccordions[j].nextElementSibling;
+                var maxHeightValue = getStyle(panel, "maxHeight");
+
+                if (maxHeightValue !== "0px") {
+                    panel.style.maxHeight = null;
+                }
+            }
+
+            isActive ? this.classList.remove("active") : this.classList.add("active");
+
+            var panel = this.nextElementSibling;
+            var maxHeightValue = getStyle(panel, "maxHeight");
+
+            if (maxHeightValue !== "0px") {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        };
+    }
+
+    function getStyle(el, styleProp) {
+        var value, defaultView = (el.ownerDocument || document).defaultView;
+        if (defaultView && defaultView.getComputedStyle) {
+            styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
+            return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        } else if (el.currentStyle) {
+            styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
+                return letter.toUpperCase();
+            });
+            value = el.currentStyle[styleProp];
+            if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
+                return (function (value) {
+                    var oldLeft = el.style.left, oldRsLeft = el.runtimeStyle.left;
+                    el.runtimeStyle.left = el.currentStyle.left;
+                    el.style.left = value || 0;
+                    value = el.style.pixelLeft + "px";
+                    el.style.left = oldLeft;
+                    el.runtimeStyle.left = oldRsLeft;
+                    return value;
+                })(value);
+            }
+            return value;
+        }
+    }
+</script> 
+</html>
