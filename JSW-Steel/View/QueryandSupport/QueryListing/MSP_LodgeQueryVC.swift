@@ -46,6 +46,7 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
     }
     
 
+    @IBOutlet weak var shadowFilterView: UIView!
     @IBOutlet weak var lodgeQueryTabelView: UITableView!
     @IBOutlet weak var notificaitonLbl: UILabel!
     
@@ -91,11 +92,13 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
         self.noDataFoundLbl.textColor = .white
     //    self.loaderView.isHidden = true
         self.filterView.isHidden = true
+        self.shadowFilterView.isHidden = true
         self.VM.VC = self
         self.noDataFoundLbl.isHidden = true
         self.lodgeQueryTabelView.register(UINib(nibName: "MSP_LodgeQueryTVC", bundle: nil), forCellReuseIdentifier: "MSP_LodgeQueryTVC")
         self.lodgeQueryTabelView.delegate = self
         self.lodgeQueryTabelView.dataSource = self
+        lodgeQueryTabelView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
     override func viewWillAppear(_ animated: Bool) {
         self.loaderView.isHidden = true
@@ -113,6 +116,19 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
 //        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
 //        tracker.send(builder.build() as [NSObject : AnyObject])
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        filterView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch =  touches.first
+        if touch?.view == self.shadowFilterView{
+            self.shadowFilterView.isHidden = true
+        }
+    }
+    
 
     @IBAction func backBtn(_ sender: Any) {
         if self.fromSideMenu == "SideMenu"{
@@ -133,6 +149,7 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
     
     @IBAction func filterBtn(_ sender: Any) {
         self.filterView.isHidden = false
+        self.shadowFilterView.isHidden = false
     }
     
     @IBAction func selectedStatusBtn(_ sender: Any) {
@@ -179,6 +196,7 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
                 self.itsFrom = "Filter"
                 self.queryListApi(startIndex: self.startindexint)
                 self.filterView.isHidden = true
+                self.shadowFilterView.isHidden = true
             }
         }else if self.fromDateLbl.text != "From Date" && self.toDateLbl.text == "To Date" {
             DispatchQueue.main.async{
@@ -219,6 +237,7 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
                 self.startindexint = 1
                 self.queryListApi(startIndex: self.startindexint)
                 self.filterView.isHidden = true
+                self.shadowFilterView.isHidden = true
             }
             
         }
@@ -235,6 +254,7 @@ class MSP_LodgeQueryVC: BaseViewController, DropDownDelegate, DateSelectedDelega
         self.startindexint = 1
         self.queryListApi(startIndex: self.startindexint)
         self.filterView.isHidden = true
+        self.shadowFilterView.isHidden = true
     }
 
     func queryListApi(startIndex: Int){

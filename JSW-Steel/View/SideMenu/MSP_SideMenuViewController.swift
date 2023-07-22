@@ -194,9 +194,9 @@ class MSP_SideMenuViewController: BaseViewController, popUpDelegate {
             self.sideMenuItems.append(SideMenuModel(parentName: "My Summary", parentList: [], parentID: 10, parentExpand: false, parentImage: "__TEMP__SVG__"))
 //            self.sideMenuItems.append(SideMenuModel(parentName: "Pan Details", parentList: [], parentID: 11, parentExpand: false, parentImage: "credit-card"))
             self.sideMenuItems.append(SideMenuModel(parentName: "Lodge Query", parentList: [], parentID: 11, parentExpand: false, parentImage: "how-to-icon"))
-            self.sideMenuItems.append(SideMenuModel(parentName: "Helpline", parentList: [], parentID: 12, parentExpand: false, parentImage: "female-services-support-icon"))
-            self.sideMenuItems.append(SideMenuModel(parentName: "Change Password", parentList: [], parentID: 13, parentExpand: false, parentImage: "key"))
-            self.sideMenuItems.append(SideMenuModel(parentName: "Benefits", parentList: self.benefitsItem, parentID: 14, parentExpand: false, parentImage: "vm-solid", parentDropDownImage: "dropDownImg"))
+//            self.sideMenuItems.append(SideMenuModel(parentName: "Helpline", parentList: [], parentID: 12, parentExpand: false, parentImage: "female-services-support-icon"))
+//            self.sideMenuItems.append(SideMenuModel(parentName: "Change Password", parentList: [], parentID: 13, parentExpand: false, parentImage: "key"))
+//            self.sideMenuItems.append(SideMenuModel(parentName: "Benefits", parentList: self.benefitsItem, parentID: 14, parentExpand: false, parentImage: "vm-solid", parentDropDownImage: "dropDownImg"))
             
             self.sideMenuItems.append(SideMenuModel(parentName: "FAQs", parentList: [], parentID: 15, parentExpand: false, parentImage: "faq-icon"))
             self.sideMenuItems.append(SideMenuModel(parentName: "Terms and Conditions", parentList: [], parentID: 16, parentExpand: false, parentImage: "text-file-black-icon"))

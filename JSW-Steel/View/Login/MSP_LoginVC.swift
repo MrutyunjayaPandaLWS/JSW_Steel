@@ -31,6 +31,7 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
         
     }
    
+    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var resendButtonView: UIView!
     @IBOutlet weak var otpTimerLbl: UILabel!
     @IBOutlet weak var enterLbl: UILabel!
@@ -132,83 +133,22 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
         self.present(vc, animated: true)
     }
     @IBAction func membershipIDDidEnd(_ sender: Any) {
-        if self.mobileNumberTF.text?.count ?? 0 == 0{
-            DispatchQueue.main.async{
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
-                vc!.delegate = self
-                vc!.titleInfo = ""
-                vc!.descriptionInfo = "Enter mobile number"
-                vc!.modalPresentationStyle = .overCurrentContext
-                vc!.modalTransitionStyle = .crossDissolve
-                self.present(vc!, animated: true, completion: nil)
-            }
-        }else{
-            //tokendata()
-            let parameterJSON = [
-                    "ActionType":"57",
-                    "Location":[
-                        "UserName":"\(self.mobileNumberTF.text ?? "")"
-                    ]
-            ] as [String:Any]
-            print(parameterJSON)
-            self.VM.verifyMobileNumberAPI(paramters: parameterJSON)
-        }
+
     }
     
     @IBAction func loginBtn(_ sender: Any) {
         
-        if mobileNumberTF.text?.count == 0 {
-            DispatchQueue.main.async{
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
-                vc!.delegate = self
-                vc!.titleInfo = ""
-                vc!.descriptionInfo = "Please enter the membership id / mobile number"
-                vc!.modalPresentationStyle = .overCurrentContext
-                vc!.modalTransitionStyle = .crossDissolve
-                self.present(vc!, animated: true, completion: nil)
-            }
-        }else if self.boolResult == false {
-            DispatchQueue.main.async{
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
-                vc!.delegate = self
-                vc!.titleInfo = ""
-                vc!.descriptionInfo = "Please accept terms and conditons"
-                
-                vc!.modalPresentationStyle = .overCurrentContext
-                vc!.modalTransitionStyle = .crossDissolve
-                self.present(vc!, animated: true, completion: nil)
-            }
-        }else if self.enteredValue == ""{
-            DispatchQueue.main.async{
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
-                vc!.delegate = self
-                vc!.titleInfo = ""
-                vc!.descriptionInfo = "Enter OTP"
-                
-                vc!.modalPresentationStyle = .overCurrentContext
-                vc!.modalTransitionStyle = .crossDissolve
-                self.present(vc!, animated: true, completion: nil)
-            }
-        }else if self.enteredValue != self.receivedOTP{
-            DispatchQueue.main.async{
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
-                vc!.delegate = self
-                vc!.titleInfo = ""
-                vc!.descriptionInfo = "Enter correct OTP"
-                
-                vc!.modalPresentationStyle = .overCurrentContext
-                vc!.modalTransitionStyle = .crossDissolve
-                self.present(vc!, animated: true, completion: nil)
-            }
-        } else {
-            //tokendata()
-            callAPI()
+        if submitLbl.text != "Submit"{
+            requestOTPBtnTapped()
+        }else{
+            LoginSubmitBtnTapped()
         }
     }
 
     
     func decline(_ vc: HR_TermsandCondtionVC) {
         self.checkMarkButton.setImage(UIImage(named: "Rectangle 18"), for: .normal)
+        self.boolResult = false
     }
     func accept(_ vc: HR_TermsandCondtionVC) {
         print(vc.boolResult)
@@ -349,7 +289,7 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                     vc!.delegate = self
                     vc!.titleInfo = ""
-                    vc!.descriptionInfo = "Your account has been deactivated! Kindly contact your administrator."
+                    vc!.descriptionInfo = "Your account is in Pending, Kindly contact your administrator."
                     vc!.modalPresentationStyle = .overCurrentContext
                     vc!.modalTransitionStyle = .crossDissolve
                     self.present(vc!, animated: true, completion: nil)
@@ -415,18 +355,17 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
                 
                 if response?.userList?[0].isUserActive ?? 0 == 1 && response?.userList?[0].verifiedStatus == 1  || response?.userList?[0].isUserActive ?? 0 == 1 && response?.userList?[0].verifiedStatus == 4{
                     UserDefaults.standard.setValue(response?.userList?[0].userId ?? -1, forKey: "UserID")
-                    UserDefaults.standard.setValue(true, forKey: "IsloggedIn?")
-                    DispatchQueue.main.async {
-                        if #available(iOS 13.0, *) {
-                            let sceneDelegate = self.view.window!.windowScene!.delegate as! SceneDelegate
-                            sceneDelegate.setHomeAsRootViewController()
-                        } else {
-                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                            appDelegate.setHomeAsRootViewController()
-                        }
-                        self.loaderView.isHidden = true
-                        self.stopLoading()
-                    }
+                    self.loaderView.isHidden = true
+                    self.stopLoading()
+                    let parameter = [
+                        "OTPType": "Enrollment",
+                        "UserId": -1,
+                        "MobileNo": self.mobileNumberTF.text ?? "",
+                        "UserName": "",
+                        "MerchantUserName": "EuroBondMerchantDemo"
+                    ] as [String: Any]
+                    self.VM.getOTPApi(parameter: parameter)
+                    
                 }else{
                     DispatchQueue.main.async{
                         self.mobileNumberTF.text = ""
@@ -448,7 +387,7 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
         }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let maxLength = 50
+        let maxLength = 10
         let currentString: NSString = (self.mobileNumberTF.text ?? "") as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
@@ -470,4 +409,104 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
 //        }
 //    }
     
+}
+
+extension MSP_LoginVC{
+    func requestOTPBtnTapped(){
+        if mobileNumberTF.text?.count == 0 {
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please enter the membership id / mobile number"
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else if self.boolResult == false {
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please accept terms and conditons"
+                
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else{
+            let parameterJSON = [
+                    "ActionType":"57",
+                    "Location":[
+                        "UserName":"\(self.mobileNumberTF.text ?? "")"
+                    ]
+            ] as [String:Any]
+            print(parameterJSON)
+            self.VM.verifyMobileNumberAPI(paramters: parameterJSON)
+            
+        }
+
+    }
+    
+    func LoginSubmitBtnTapped(){
+        if mobileNumberTF.text?.count == 0 {
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please enter the membership id / mobile number"
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else if self.boolResult == false {
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please accept terms and conditons"
+                
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else if self.enteredValue == ""{
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Enter OTP"
+                
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else if self.enteredValue != self.receivedOTP{
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Enter correct OTP"
+                
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        } else {
+            //tokendata()
+//            callAPI()
+            UserDefaults.standard.setValue(true, forKey: "IsloggedIn?")
+            DispatchQueue.main.async {
+                if #available(iOS 13.0, *) {
+                    let sceneDelegate = self.view.window!.windowScene!.delegate as! SceneDelegate
+                    sceneDelegate.setHomeAsRootViewController()
+                } else {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.setHomeAsRootViewController()
+                }
+               
+            }
+        }
+
+    }
 }

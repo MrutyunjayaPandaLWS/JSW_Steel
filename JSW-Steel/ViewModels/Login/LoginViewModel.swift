@@ -99,21 +99,20 @@ class LoginViewModel: popUpDelegate{
                         self.VC?.loaderView.isHidden = true
                         self.VC?.stopLoading()
                         
-                        self.VC?.mobileNumberTF.isEnabled = false
-                        self.VC?.submitLbl.text = "Submit"
-                        self.VC?.otpTimerLbl.isHidden = false
-                        self.VC?.otpView.isHidden = false
-                        self.VC?.mobileNumberTF.isEnabled = false
-                        self.VC?.loginButtonTopSpaceConstraint.constant = 160
-                        let parameter = [
-                            "OTPType": "Enrollment",
-                            "UserId": -1,
-                            "MobileNo": self.VC?.mobileNumberTF.text ?? "",
-                            "UserName": "",
-                            "MerchantUserName": "EuroBondMerchantDemo"
-                        ] as [String: Any]
-                        self.getOTPApi(parameter: parameter)
-                       
+//                        self.VC?.mobileNumberTF.isEnabled = false
+//                        self.VC?.submitLbl.text = "Submit"
+//                        self.VC?.otpTimerLbl.isHidden = false
+//                        self.VC?.otpView.isHidden = false
+//                        self.VC?.loginButtonTopSpaceConstraint.constant = 160
+//                        let parameter = [
+//                            "OTPType": "Enrollment",
+//                            "UserId": -1,
+//                            "MobileNo": self.VC?.mobileNumberTF.text ?? "",
+//                            "UserName": "",
+//                            "MerchantUserName": "EuroBondMerchantDemo"
+//                        ] as [String: Any]
+//                        self.getOTPApi(parameter: parameter)
+                        self.VC?.callAPI()
                     }
                 }
                  }catch{
@@ -146,7 +145,11 @@ class LoginViewModel: popUpDelegate{
 //                        self.VC?.receivedOTP = result?.returnMessage ?? ""
                         self.VC?.receivedOTP = "123456"
                         print(result?.returnMessage ?? "", "-OTP")
-                        
+                        self.VC?.mobileNumberTF.isEnabled = false
+                        self.VC?.submitLbl.text = "Submit"
+                        self.VC?.otpTimerLbl.isHidden = false
+                        self.VC?.otpView.isHidden = false
+                        self.VC?.loginButtonTopSpaceConstraint.constant = 160
                       //  self.VC?.receivedOTP = "123456"
                        
                     }

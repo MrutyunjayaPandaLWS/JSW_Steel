@@ -11,6 +11,7 @@ import Lottie
 
 class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate{
 
+    @IBOutlet weak var shadowFilterView: UIView!
     @IBOutlet weak var fromDateLbl: UILabel!
     
     @IBOutlet weak var toDateLbl: UILabel!
@@ -47,6 +48,7 @@ class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate
         
         self.noDataFoundLbl.isHidden = true
         self.myEarningFilterView.isHidden = true
+        self.shadowFilterView.isHidden = true
         self.myEarningsTableView.delegate = self
         self.myEarningsTableView.dataSource = self
         self.myEarningsTableView.separatorStyle = .none
@@ -57,10 +59,12 @@ class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate
             self.backOutBTN.isHidden = true
             self.headerLBL.textAlignment = .center
         }
+        myEarningsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.myEarningFilterView.isHidden = true
+        self.shadowFilterView.isHidden = true
         self.VM.myEarningListArray.removeAll()
         selectedFromDate = ""
         selectedToDate = ""
@@ -81,8 +85,21 @@ class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate
 //        tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        myEarningFilterView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch =  touches.first
+        if touch?.view == self.shadowFilterView{
+            self.shadowFilterView.isHidden = true
+        }
+    }
+    
     @IBAction func myEarningsFilterBtn(_ sender: Any) {
         self.myEarningFilterView.isHidden = false
+        self.shadowFilterView.isHidden = false
         
     }
     @IBAction func myEaningsBellBtn(_ sender: Any) {
@@ -128,6 +145,7 @@ class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate
         self.VM.myEarningListArray.removeAll()
         self.myEarningListApi(startIndex: self.startindexint)
         self.myEarningFilterView.isHidden = true
+        self.shadowFilterView.isHidden = true
         
     }
     
@@ -170,6 +188,7 @@ class MSP_MyEarningsVC: BaseViewController , DateSelectedDelegate, popUpDelegate
                 self.VM.myEarningListArray.removeAll()
                 self.myEarningListApi(startIndex: self.startindexint)
                 self.myEarningFilterView.isHidden = true
+                self.shadowFilterView.isHidden = true
             }
         }
     }

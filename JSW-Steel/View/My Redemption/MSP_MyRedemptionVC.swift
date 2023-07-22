@@ -37,6 +37,7 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
         self.dismiss(animated: true)
     }
     
+    @IBOutlet weak var shadowFilterView: UIView!
     @IBOutlet weak var noDataFoundLbl: UILabel!
     @IBOutlet weak var notificationCountLbl: UILabel!
     @IBOutlet weak var myRedemptionTableView: UITableView!
@@ -78,12 +79,13 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
         self.VM.VC = self
         self.loaderView.isHidden = true
         self.myRedemptionfilterView.isHidden = false
+        self.shadowFilterView.isHidden =  true
         self.myRedemptionTableView.register(UINib(nibName: "MSP_MyRedemptionTVC", bundle: nil), forCellReuseIdentifier: "MSP_MyRedemptionTVC")
         self.myRedemptionTableView.separatorStyle = .none
         self.myRedemptionTableView.delegate = self
         self.myRedemptionTableView.dataSource = self
        
-        
+        myRedemptionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         if ((tabBarController?.shouldPerformSegue(withIdentifier: "comingFrom", sender: .none)) != nil){
             self.backOutBTN.isHidden = true
             self.headerLBL.textAlignment = .center
@@ -95,6 +97,7 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
       //  self.notificationListApi()
         self.VM.myRedemptionList.removeAll()
         self.filterView.isHidden = true
+        self.shadowFilterView.isHidden =  true
         self.loaderView.isHidden = true
         self.startindexint = 1
         selectedFromDate = ""
@@ -116,6 +119,21 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        filterView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch =  touches.first
+        if touch?.view == self.shadowFilterView{
+            self.shadowFilterView.isHidden = true
+        }
+    }
+    
+    
     @IBAction func notificationBtn(_ sender: Any) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_NotificationVC") as! MSP_NotificationVC
         self.navigationController?.pushViewController(vc, animated: true)
@@ -132,9 +150,11 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
         self.startindexint = 1
         self.myRedemptionListApi(startIndex: self.startindexint)
         self.filterView.isHidden = true
+        self.shadowFilterView.isHidden =  true
     }
     @IBAction func redemptionFilterBtn(_ sender: Any){
         self.filterView.isHidden = false
+        self.shadowFilterView.isHidden = false
     }
     
     
@@ -156,6 +176,7 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
                 self.itsFrom = "Filter"
                 self.myRedemptionListApi(startIndex: self.startindexint)
                     self.filterView.isHidden = true
+                self.shadowFilterView.isHidden = true
             }
         }else if self.fromDateLbl.text != "From Date" && self.toDateLbl.text == "To Date" {
             DispatchQueue.main.async{
@@ -196,6 +217,7 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
                 self.itsFrom = "Filter"
                 self.myRedemptionListApi(startIndex: self.startindexint)
                     self.filterView.isHidden = true
+                self.shadowFilterView.isHidden = true
             }
             
         }
@@ -352,15 +374,23 @@ extension MSP_MyRedemptionVC: UITableViewDelegate, UITableViewDataSource{
                 cell?.statusView.borderColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
             }
             else if self.VM.myRedemptionList[indexPath.row].status ?? 0 == 7 {
-                cell?.statusLbl.text = " Poster For Approval"
+                cell?.statusLbl.text = "Pending"
                 cell?.statusLbl.textColor = UIColor.black
-                cell?.statusView.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
-                cell?.statusView.borderColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+                cell?.statusView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+                cell?.statusView.borderColor = #colorLiteral(red: 0.9523764253, green: 0.9772849679, blue: 0.9983460307, alpha: 1)
+//                cell?.statusLbl.text = " Poster For Approval"
+//                cell?.statusLbl.textColor = UIColor.black
+//                cell?.statusView.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+//                cell?.statusView.borderColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
             }else if self.VM.myRedemptionList[indexPath.row].status ?? 0 == 8 {
-                cell?.statusLbl.text = "Posted For Approval 2"
+                cell?.statusLbl.text = "Pending"
                 cell?.statusLbl.textColor = UIColor.black
-                cell?.statusView.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
-                cell?.statusView.borderColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+                cell?.statusView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+                cell?.statusView.borderColor = #colorLiteral(red: 0.9523764253, green: 0.9772849679, blue: 0.9983460307, alpha: 1)
+//                cell?.statusLbl.text = "Posted For Approval 2"
+//                cell?.statusLbl.textColor = UIColor.black
+//                cell?.statusView.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+//                cell?.statusView.borderColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
             }
             //        else if self.VM.myRedemptionList[indexPath.row].status ?? 0 == 9 {
             //            cell?.statusLbl.text = "OnHold"

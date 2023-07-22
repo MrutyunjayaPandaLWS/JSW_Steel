@@ -57,7 +57,7 @@ class MSP_DropDownVC: BaseViewController{
     var loyaltyID = UserDefaults.standard.string(forKey: "LoyaltyID") ?? ""
     var genderArray = [String]()
     var titleArray = [String]()
-    var statusListArray = ["Pending","Approved","Rejected", "Escalated"]
+    var statusListArray = ["Pending","Approved","Rejected", "Escalated","Escalated to Admin"]
     var selectedStatusName = ""
     var selectedStatusId = -1
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class MSP_DropDownVC: BaseViewController{
          }else if isComeFrom == 6{
              self.claimPointsDealerApi()
          }else if isComeFrom == 7{
-             self.heightOfTable.constant = CGFloat(self.statusListArray.count * 30)
+             self.heightOfTable.constant = CGFloat(self.statusListArray.count * 40)
              self.dropDownTableView.reloadData()
          }else if isComeFrom == 8{
              self.myRedemptionStatusApi()
@@ -180,7 +180,7 @@ class MSP_DropDownVC: BaseViewController{
                             //self.heightOfTable.constant =
                             if self.VM.myClaimsPointsDelarArray.count < 10 {
                                // for item in self.VM.myClaimsPointsDelarArray {
-                                    self.heightOfTable.constant = CGFloat(self.VM.myClaimsPointsDelarArray.count * 30)
+                                    self.heightOfTable.constant = CGFloat(self.VM.myClaimsPointsDelarArray.count * 40)
                                // }
                             }else{
                                 self.heightOfTable.constant = 350
@@ -293,6 +293,8 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
                 self.selectedStatusId = -1
             }else if self.selectedStatusName == "Escalated"{
                 self.selectedStatusId = 2
+            }else if self.selectedStatusName == "Escalated to Admin"{
+                self.selectedStatusId = 2
             }
 //            else if self.selectedStatusName == "Cancelled"{
 //                self.selectedStatusId = 3
@@ -310,9 +312,9 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
             
         }
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 30
-//    }
-//
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+
 }
     

@@ -38,7 +38,9 @@ class MSP_ClaimPointsTVC: UITableViewCell, UITextViewDelegate,UITextFieldDelegat
     
     
     @IBAction func enteredQTYEditingDidEnd(_ sender: Any) {
-        self.delegate.qtyValue(self)
+        if  self.qtyTF.text?.count != 0{
+            self.delegate.qtyValue(self)
+        }
     }
     
     @IBAction func enterRemarksEditingDidEnd(_ sender: Any) {
@@ -46,11 +48,20 @@ class MSP_ClaimPointsTVC: UITableViewCell, UITextViewDelegate,UITextFieldDelegat
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       
-        let maxLength = 1212121212
-        let currentString: NSString = (qtyTF.text ?? "") as NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
-        return newString.length <= maxLength
+        let currentText = textField.text ?? ""
+        let replacedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        let decimalPattern = "^\\d*\\.?\\d{0,3}$"
+        let decimalRegex = try! NSRegularExpression(pattern: decimalPattern, options: [])
+        let matches = decimalRegex.matches(in: replacedText, options: [], range: NSRange(location: 0, length: replacedText.utf16.count))
+        if matches.count > 0 {
+            if replacedText == "." {
+                textField.text = "0" + replacedText
+                return false
+            }
+            return true
+        } else {
+            return false
+        }
+        
     }
 }

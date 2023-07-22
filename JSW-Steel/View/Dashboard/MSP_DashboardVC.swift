@@ -20,9 +20,11 @@ class MSP_DashboardVC: BaseViewController, popUpDelegate{
     func popupAlertDidTap(_ vc: PopupAlertOne_VC) {}
     
 
+    @IBOutlet weak var tierName: UILabel!
     @IBOutlet weak var accountTypeName: UILabel!
     @IBOutlet var offersEmptyImg: UIImageView!
     
+    @IBOutlet weak var tierImage: UIImageView!
     @IBOutlet weak var dealerImage: UIImageView!
     @IBOutlet weak var retailerImage: UIImageView!
     @IBOutlet weak var offersandPromotionView: ImageSlideshow!
@@ -299,8 +301,8 @@ class MSP_DashboardVC: BaseViewController, popUpDelegate{
             }
             offersandPromotionView.setImageInputs(self.sourceArray)
             offersandPromotionView.slideshowInterval = 3.0
-            offersandPromotionView.zoomEnabled = true
-            offersandPromotionView.contentScaleMode = .scaleToFill
+            offersandPromotionView.zoomEnabled = false
+            offersandPromotionView.contentScaleMode = .scaleAspectFill
         }else{
             offersandPromotionView.setImageInputs([
                 ImageSource(image: UIImage(named: "defaultImage")!)
@@ -394,19 +396,19 @@ class MSP_DashboardVC: BaseViewController, popUpDelegate{
 //                        self.dealerImage.isHidden = true
 //                    }
                     
-                    self.totalPointsLbl.text = "Total Points: \(Int(response?.objCustomerDashboardList?[0].totalRedeemed ?? 0) ?? 0)"
+                    self.totalPointsLbl.text = "Total Points: \(response?.objCustomerDashboardList?[0].totalRedeemed ?? 0)"
                     UserDefaults.standard.set(response?.objCustomerDashboardList?[0].totalRedeemed ?? 0, forKey: "TotalRedeemedPoints")
-                    self.customerGradeLbl.text = response?.lstCustomerFeedBackJsonApi?[0].customerGrade ?? "-"
+                    self.tierName.text = response?.lstCustomerFeedBackJsonApi?[0].customerGrade ?? "-"
                     
                     // self.customerCatagoryLbl.text = response?.lstCustomerFeedBackJsonApi?[0].title ?? "-"
                     if response?.lstCustomerFeedBackJsonApi?[0].customerGrade ?? "" == "Bronze" {
-                        self.customerGradeImage.image = UIImage(named: "grade1")
+                        self.tierImage.image = UIImage(named: "grade1")
                     } else if response?.lstCustomerFeedBackJsonApi?[0].customerGrade ?? "" == "Gold" {
-                        self.customerGradeImage.image = UIImage(named: "grade2")
+                        self.tierImage.image = UIImage(named: "grade2")
                     } else if response?.lstCustomerFeedBackJsonApi?[0].customerGrade ?? "" == "Silver" {
-                        self.customerGradeImage.image = UIImage(named: "grade3")
+                        self.tierImage.image = UIImage(named: "grade3")
                     } else {
-                        self.customerGradeImage.image = UIImage(named: "grade3")
+                        self.tierImage.image = UIImage(named: "grade3")
                     }
                     print(response?.lstPromotionListJsonApi?.count)
                     if response?.lstPromotionListJsonApi?.count != 0{
@@ -644,6 +646,7 @@ class MSP_DashboardVC: BaseViewController, popUpDelegate{
             offersandPromotionView.setImageInputs(sourceArray1)
             offersandPromotionView.slideshowInterval = 3.0
             offersandPromotionView.zoomEnabled = false
+            offersandPromotionView.contentScaleMode = .scaleToFill
         } else {
             self.bannerEmptyImg.isHidden = false
         }

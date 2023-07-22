@@ -32,9 +32,14 @@ class BaseViewController: UIViewController {
     func convertDateFormater(_ date: String, fromDate: String, toDate: String) -> String {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = fromDate
-            let date = dateFormatter.date(from: date)
+            let date1 = dateFormatter.date(from: date)
             dateFormatter.dateFormat = toDate
-        return dateFormatter.string(from: date!)
+        if let data = date1{
+            return dateFormatter.string(from: data)
+        }else{
+            return date
+        }
+        
  
         }
     

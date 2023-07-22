@@ -23,6 +23,7 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
     }
     
 
+    @IBOutlet weak var shadowFilterView: UIView!
     @IBOutlet var filterScreenView: GradientView!
     @IBOutlet var claimsCountLbl: UILabel!
     @IBOutlet var claimsTableView: UITableView!
@@ -69,10 +70,12 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
         self.cancelBtn.setTitleColor(.black, for: .normal)
         self.noDataLbl.isHidden = true
         self.filterView.isHidden = true
+        shadowFilterView.isHidden =  true
         self.claimsTableView.delegate = self
         self.claimsTableView.dataSource = self
         self.claimsTableView.register(UINib(nibName: "MSP_ClaimStatusTVC", bundle: nil), forCellReuseIdentifier: "MSP_ClaimStatusTVC")
         self.loaderView.isHidden = false
+        claimsTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         self.lottieAnimation(animationView: self.loaderAnimatedView)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.9, execute: {
             self.claimPointsApi(startIndex: self.startindexint)
@@ -89,6 +92,17 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
 //        tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        filterView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch =  touches.first
+        if touch?.view == self.shadowFilterView{
+            self.shadowFilterView.isHidden = true
+        }
+    }
     
     @IBAction func claimStatusNotificationBtn(_ sender: Any) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_NotificationVC") as! MSP_NotificationVC
@@ -106,6 +120,7 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
     
     @IBAction func filterActBtn(_ sender: Any) {
         self.filterView.isHidden = false
+        shadowFilterView.isHidden =  false
         self.cancelBtn.backgroundColor = .clear
         self.cancelBtn.setTitleColor(.black, for: .normal)
     }
@@ -158,6 +173,7 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
                 self.itsFrom = "Filter"
                 self.claimPointsApi(startIndex: self.startindexint)
                 self.filterView.isHidden = true
+                self.shadowFilterView.isHidden =  true
             }
         }else if self.fromDateLbl.text != "From Date" && self.toDateLbl.text == "To Date" {
             DispatchQueue.main.async{
@@ -197,7 +213,8 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
                 self.startindexint = 1
                 self.itsFrom = "Filter"
                 self.claimPointsApi(startIndex: self.startindexint)
-                    self.filterView.isHidden = true
+                self.filterView.isHidden = true
+                self.shadowFilterView.isHidden =  true
             }
             
         }
@@ -218,6 +235,7 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
         self.itsFrom = "Filter"
         self.claimPointsApi(startIndex: self.startindexint)
         self.filterView.isHidden = true
+        self.shadowFilterView.isHidden =  true
     }
     
     func acceptDate(_ vc: MSP_DOBVC) {
@@ -301,7 +319,7 @@ extension MSP_ClaimStatusVC: UITableViewDelegate, UITableViewDataSource{
         cell.remarksLbl.text = self.VM.claimStatusArray[indexPath.row].remarks ?? "-"
         
         
-            if self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Pending" || self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Escalated"{
+            if self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Pending" || self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Escalated" || self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Escalated to Admin"{
                 cell.claimStatusView.backgroundColor = #colorLiteral(red: 0.8686603904, green: 0.6390978098, blue: 0.02780325711, alpha: 1)
             }else if self.VM.claimStatusArray[indexPath.row].status ?? "-" == "Approved"{
                 cell.claimStatusView.backgroundColor = #colorLiteral(red: 0.03790682182, green: 0.6447886229, blue: 0.3517391384, alpha: 1)

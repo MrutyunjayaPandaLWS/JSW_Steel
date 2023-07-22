@@ -3,4 +3,84 @@
    uuid = "33500A30-F966-4EC9-B1D1-036DC0B6C393"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7459B705-8E0C-4D9E-91A5-AF38F479E417"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JSW-Steel/View/ClaimPoints/ClaimPointsLising/MSP_ClaimPointsTVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "enteredQTYEditingDidEnd(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7459B705-8E0C-4D9E-91A5-AF38F479E417 - d41c3c81fc07a33c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JSW_Steel.MSP_ClaimPointsTVC.enteredQTYEditingDidEnd(Any) -&gt; ()"
+                  moduleName = "JSW-Steel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/Ios%20project/LWS%20project/JSW_Steel/JSW-Steel/View/ClaimPoints/ClaimPointsLising/MSP_ClaimPointsTVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "464">
+               </Location>
+               <Location
+                  uuid = "7459B705-8E0C-4D9E-91A5-AF38F479E417 - d41c3c81fc07a33c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JSW_Steel.MSP_ClaimPointsTVC.enteredQTYEditingDidEnd(Any) -&gt; ()"
+                  moduleName = "JSW-Steel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/Ios%20project/LWS%20project/JSW_Steel/JSW-Steel/View/ClaimPoints/ClaimPointsLising/MSP_ClaimPointsTVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "760">
+               </Location>
+               <Location
+                  uuid = "7459B705-8E0C-4D9E-91A5-AF38F479E417 - d41c3c81fc07a33c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JSW_Steel.MSP_ClaimPointsTVC.enteredQTYEditingDidEnd(Any) -&gt; ()"
+                  moduleName = "JSW-Steel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/Ios%20project/LWS%20project/JSW_Steel/JSW-Steel/View/ClaimPoints/ClaimPointsLising/MSP_ClaimPointsTVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "596">
+               </Location>
+               <Location
+                  uuid = "7459B705-8E0C-4D9E-91A5-AF38F479E417 - d41c3c81fc07a33c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JSW_Steel.MSP_ClaimPointsTVC.enteredQTYEditingDidEnd(Any) -&gt; ()"
+                  moduleName = "JSW-Steel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Documents/Ios%20project/LWS%20project/JSW_Steel/JSW-Steel/View/ClaimPoints/ClaimPointsLising/MSP_ClaimPointsTVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "656">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

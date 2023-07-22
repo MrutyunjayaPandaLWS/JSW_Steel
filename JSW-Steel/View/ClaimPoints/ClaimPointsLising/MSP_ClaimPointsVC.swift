@@ -31,10 +31,11 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
         if cell.qtyTF.tag == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1 {
             print(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1, "Product Id")
             let finalValues = cell.remarksTF.text ?? ""
-            let finalValue = cell.qtyTF.text ?? ""
-            cell.qtyTF.text = finalValue
+            let finalValue = Double(cell.qtyTF.text ?? "0") ?? 0
             
-            if finalValue  == "0" || finalValue == "0.0" || finalValue == "0.00" || finalValue == "0.000" || finalValue == "00.0" || finalValue == "0.0" || finalValue == "00" || finalValue == "000" || finalValue == "0000" || finalValue == "00000" || finalValue == "000000" || finalValue == "000000" || finalValue == "00000000"{
+            
+//            if finalValue  == "0" || finalValue == "0.0" || finalValue == "0.00" || finalValue == "0.000" || finalValue == "00.0" || finalValue == "0.0" || finalValue == "00" || finalValue == "000" || finalValue == "0000" || finalValue == "00000" || finalValue == "000000" || finalValue == "000000" || finalValue == "00000000"{
+            if finalValue  == 0{
                 self.view.makeToast("Enter valid quantity", duration: 2.0, position: .bottom)
                 cell.qtyTF.text = ""
                 
@@ -51,24 +52,26 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
                         }
                     }
                 
-            }else if finalValue == "" || finalValue == " " || finalValue == "  " || finalValue == "   "{
-                self.view.makeToast("Enter quantity", duration: 2.0, position: .bottom)
-                cell.qtyTF.text = ""
-                for data in self.claimPointsDetailsArray{
-                    if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
-                        data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
-                        data.productCode = ""
-                        data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
-                        data.qunantity = cell.qtyTF.text ?? ""
-                        data.quantityKG = ""
-                        data.remarks = "\(finalValues)"
-                        persistanceservice.saveContext()
-                        self.fetchCartDetails()
-                        }
-                    }
-            }else if finalValue != "" && finalValue != "0" && finalValue != " " && finalValue != "-1" && finalValue != "00" && finalValue != "000" && finalValue != "0000"  && finalValue != "0000" && finalValue != "00000" && finalValue != "000000" && finalValue != "0000000" && finalValue != "00000000" && finalValue != "000000000" && finalValue != "0000000000" {
-                
-                let calcValue = Int(finalValue)! - 1
+            }
+//            else if finalValue == "" || finalValue == " " || finalValue == "  " || finalValue == "   "{
+//                self.view.makeToast("Enter quantity", duration: 2.0, position: .bottom)
+//                cell.qtyTF.text = ""
+//                for data in self.claimPointsDetailsArray{
+//                    if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
+//                        data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
+//                        data.productCode = ""
+//                        data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
+//                        data.qunantity = cell.qtyTF.text ?? ""
+//                        data.quantityKG = ""
+//                        data.remarks = "\(finalValues)"
+//                        persistanceservice.saveContext()
+//                        self.fetchCartDetails()
+//                        }
+//                    }
+//            }
+//            else if finalValue != "" && finalValue != "0" && finalValue != " " && finalValue != "-1" && finalValue != "00" && finalValue != "000" && finalValue != "0000"  && finalValue != "0000" && finalValue != "00000" && finalValue != "000000" && finalValue != "0000000" && finalValue != "00000000" && finalValue != "000000000" && finalValue != "0000000000" {
+            if finalValue  > 0{
+                let calcValue = finalValue
                 print(calcValue)
                 if calcValue >= 0{
                     

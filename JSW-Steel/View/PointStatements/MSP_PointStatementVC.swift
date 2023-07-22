@@ -58,7 +58,7 @@ class MSP_PointStatementVC: BaseViewController , DateSelectedDelegate, popUpDele
     
     
     let customerTypeId = UserDefaults.standard.value(forKey: "CustomerTypeId") ?? 0
-    let totalRedeemedPts = UserDefaults.standard.integer(forKey: "TotalRedeemedPoints")
+    let totalRedeemedPts = UserDefaults.standard.string(forKey: "TotalRedeemedPoints")
     let userID = UserDefaults.standard.string(forKey: "UserID") ?? ""
     var fromSideMenu = ""
     var credited = ""
@@ -92,7 +92,7 @@ class MSP_PointStatementVC: BaseViewController , DateSelectedDelegate, popUpDele
     var VM = PointStatemntModelCLassVM()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.totalPts.text = "\(self.totalRedeemedPts ?? 0)"
+        self.totalPts.text = "\(self.totalRedeemedPts ?? "0")"
         self.VM.VC = self
         self.loaderView.isHidden = true
         self.volumeOutBtn.isHidden = true
