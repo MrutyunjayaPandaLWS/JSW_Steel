@@ -38,9 +38,9 @@ class MSP_ClaimPointsTVC: UITableViewCell, UITextViewDelegate,UITextFieldDelegat
     
     
     @IBAction func enteredQTYEditingDidEnd(_ sender: Any) {
-        if  self.qtyTF.text?.count != 0{
+//        if  self.qtyTF.text?.count != 0{
             self.delegate.qtyValue(self)
-        }
+//        }
     }
     
     @IBAction func enterRemarksEditingDidEnd(_ sender: Any) {

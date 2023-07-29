@@ -25,14 +25,14 @@ class DefaultAddressModels{
                         self.VC?.loaderView.isHidden = true
                         self.VC?.stopLoading()
                         self.defaultAddressArray = response?.lstCustomerJson ?? []
-                        self.VC?.customerAddressTV.text = "\(self.defaultAddressArray[0].firstName ?? "-"),\n\(self.defaultAddressArray[0].mobile ?? "-"),\n\(self.defaultAddressArray[0].address1 ?? "-"),\n\(self.defaultAddressArray[0].cityName ?? "-"),\n\(self.defaultAddressArray[0].stateName ?? "-"),\n\(self.defaultAddressArray[0].countryName ?? "-"),\n\(self.defaultAddressArray[0].zip ?? "-")"
+                        self.VC?.customerAddressTV.text = "\(self.defaultAddressArray[0].firstName ?? "-"),\n\(self.defaultAddressArray[0].mobile ?? "-"),\n\(self.defaultAddressArray[0].address1 ?? "-"),\n\(self.defaultAddressArray[0].district ?? "-"),\n\(self.defaultAddressArray[0].stateName ?? "-"),\n\(self.defaultAddressArray[0].countryName ?? "-"),\n\(self.defaultAddressArray[0].zip ?? "-")"
                         self.VC?.selectedname = self.defaultAddressArray[0].firstName ?? "-"
                         self.VC?.selectedemail = self.defaultAddressArray[0].email ?? "-"
                         self.VC?.selectedmobile = self.defaultAddressArray[0].mobile ?? "-"
                         self.VC?.selectedState = self.defaultAddressArray[0].stateName ?? "-"
                         self.VC?.selectedStateID = self.defaultAddressArray[0].stateId ?? 0
-                        self.VC?.selectedCity = self.defaultAddressArray[0].cityName ?? "-"
-                        self.VC?.selectedCityID = self.defaultAddressArray[0].cityId ?? 0
+                        self.VC?.selectedCity = self.defaultAddressArray[0].district ?? "-"
+                        self.VC?.selectedCityID = self.defaultAddressArray[0].districtId ?? 0
                         self.VC?.selectedaddress = self.defaultAddressArray[0].address1 ?? "-"
                         self.VC?.selectedpincode = self.defaultAddressArray[0].zip ?? "-"
                         self.VC?.selectedCountryId = self.defaultAddressArray[0].countryId ?? 0

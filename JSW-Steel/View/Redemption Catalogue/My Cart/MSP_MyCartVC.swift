@@ -34,6 +34,7 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.VM.VC = self
         self.loaderView.isHidden = true
         self.myCartTableView.delegate = self
         self.myCartTableView.dataSource = self
@@ -67,6 +68,17 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
     }
     
     @IBAction func proceedbtn(_ sender: Any) {
+        
+//        verifyAdhaarExistencyApi()
+        if self.VM.myCartListArray[0].is_CartRedeemable != 1{
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+            vc!.delegate = self
+            vc!.titleInfo = ""
+            vc!.descriptionInfo = "Pease submit your Aadhar card to proceed for redemption"
+            vc!.modalPresentationStyle = .overCurrentContext
+            vc!.modalTransitionStyle = .crossDissolve
+            self.present(vc!, animated: true, completion: nil)
+        }else
         if self.verifiedStatus != 1{
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
             vc!.delegate = self
@@ -98,7 +110,7 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
                     self.quantity = totalQTY
                     cell.countTF.text = "\(quantity)"
                     self.customerCartId = self.VM.myCartListArray[tappedIndexPath.row].customerCartId ?? 0
-                    if self.VM.myCartListArray[tappedIndexPath.row].is_Redeemable ?? 0 == 1{
+                    if self.VM.myCartListArray[tappedIndexPath.row].is_CartRedeemable ?? 0 == 1{
                         self.increaseProduct()
                     }else{
                         DispatchQueue.main.async{
@@ -106,7 +118,7 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
                             vc!.delegate = self
                             vc!.titleInfo = ""
                             
-                            vc!.descriptionInfo = "You are not allowed to redeem. Please contact your adminstration"
+                            vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
                            
                             vc!.modalPresentationStyle = .overCurrentContext
                             vc!.modalTransitionStyle = .crossDissolve
@@ -149,7 +161,22 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
                             self.customerCartId = self.VM.myCartListArray[tappedIndexPath.row].customerCartId ?? 0
                             if self.quantity >= 1 {
                                 cell.countTF.text = "\(quantity)"
-                                self.increaseProduct()
+//                                self.increaseProduct()
+                                if self.VM.myCartListArray[tappedIndexPath.row].is_CartRedeemable ?? 0 == 1{
+                                    self.increaseProduct()
+                                }else{
+                                    DispatchQueue.main.async{
+                                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                                        vc!.delegate = self
+                                        vc!.titleInfo = ""
+                                        
+                                        vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+                                       
+                                        vc!.modalPresentationStyle = .overCurrentContext
+                                        vc!.modalTransitionStyle = .crossDissolve
+                                        self.present(vc!, animated: true, completion: nil)
+                                    }
+                                }
                             }else{
                                 self.quantity = 1
                             }
@@ -361,7 +388,7 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
                             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                             vc!.delegate = self
                             vc!.titleInfo = ""
-                            vc!.descriptionInfo = "You are not allowled to redeem .Please contact your administrator"
+                            vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
                             vc!.modalPresentationStyle = .overCurrentContext
                             vc!.modalTransitionStyle = .crossDissolve
                             self.present(vc!, animated: true, completion: nil)
@@ -378,8 +405,9 @@ class MSP_MyCartVC: BaseViewController, popUpDelegate, MyCartDelegate {
                             vc!.delegate = self
                             vc!.titleInfo = ""
                             
-                            vc!.descriptionInfo = "\(sortedValues[1])"
-                            
+//                            vc!.descriptionInfo = "\(sortedValues[1])"
+                            vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+//                            vc!.descriptionInfo = "Please upload and verify your idenity proof to redeem"
                             vc!.modalPresentationStyle = .overCurrentContext
                             vc!.modalTransitionStyle = .crossDissolve
                             self.present(vc!, animated: true, completion: nil)

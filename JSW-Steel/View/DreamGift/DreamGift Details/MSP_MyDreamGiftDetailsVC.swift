@@ -128,7 +128,17 @@ class MSP_MyDreamGiftDetailsVC: BaseViewController, popUpDelegate {
     
     @IBAction func redeemBtn(_ sender: Any) {
         print(verifiedStatus,"ljsdkhjkhi")
-        
+        if isRedeemable != 1{
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else
         if self.verifiedStatus != 1{
             DispatchQueue.main.async{
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC

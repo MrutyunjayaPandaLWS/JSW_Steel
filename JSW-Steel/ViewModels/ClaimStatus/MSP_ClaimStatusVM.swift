@@ -17,7 +17,7 @@ class MSP_ClaimStatusVM {
     func claimStatusApi(parameters: JSON){
         DispatchQueue.main.async {
               self.VC?.startLoading()
-            self.claimStatusArray.removeAll()
+//            self.claimStatusArray.removeAll()
          }
         
         self.requestAPIs.claimStatusApi(parameters: parameters) { (result, error) in
@@ -29,32 +29,34 @@ class MSP_ClaimStatusVM {
                             self.claimStatusArray += claimStatusListing
                             self.VC?.noofelements = self.claimStatusArray.count
                             print(self.claimStatusArray.count,"Claim Status")
-                                self.VC?.loaderView.isHidden = true
-                                self.VC?.stopLoading()
+                            self.VC?.loaderView.isHidden = true
+                            self.VC?.stopLoading()
+                            
+                            if self.claimStatusArray.count != 0{
                                 
-                                if self.claimStatusArray.count != 0{
-                                    
-                                    self.VC?.claimsTableView.isHidden = false
-                                    self.VC?.noDataLbl.isHidden = true
-                                    self.VC?.claimsTableView.reloadData()
-                                    
-                                }else{
-                                    
-                                    self.VC?.noDataLbl.isHidden = false
-                                    self.VC?.claimsTableView.isHidden = true
-                                    self.VC?.filterScreenView.isHidden = false
-                                }
-                        }else{
-                            if self.VC!.itsFrom == "Filter"{
-                                    self.VC?.noDataLbl.isHidden = false
-                                    self.VC?.claimsTableView.isHidden = true
-                                    self.VC?.filterScreenView.isHidden = false
+                                self.VC?.claimsTableView.isHidden = false
+                                self.VC?.noDataLbl.isHidden = true
+                                self.VC?.claimsTableView.reloadData()
+                                
                             }else{
+                                
                                 self.VC?.noDataLbl.isHidden = false
                                 self.VC?.claimsTableView.isHidden = true
                                 self.VC?.filterScreenView.isHidden = false
                             }
-
+                        }else{
+                            if self.claimStatusArray.count == 0{
+                                if self.VC!.itsFrom == "Filter"{
+                                    self.VC?.noDataLbl.isHidden = false
+                                    self.VC?.claimsTableView.isHidden = true
+                                    self.VC?.filterScreenView.isHidden = false
+                                }else{
+                                    self.VC?.noDataLbl.isHidden = false
+                                    self.VC?.claimsTableView.isHidden = true
+                                    self.VC?.filterScreenView.isHidden = false
+                                }
+                            }
+                            
                         }
                     }
 

@@ -215,7 +215,7 @@ class MSP_CreateNewQueryVC: BaseViewController, popUpDelegate,UITextViewDelegate
             "LoyaltyID": "\(loyaltyId)",
             "QueryDetails": self.queryDetailsTextView.text ?? "",
             "QuerySummary": self.queryDetailsTextView.text ?? "",
-            "SourceType": "1",
+            "SourceType": "5",
             "ImageUrl": "\(self.strdata1)",
         ] as [String: Any]
         print(parameters)

@@ -134,8 +134,8 @@ class MSP_RedemptionSubmissionVC: BaseViewController, popUpDelegate,UITextFieldD
         print(contractorName, "Contractor Name")
         print(self.cityID, "City ID")
         if self.enteredValue.count == 6{
-            if self.OTPforVerification == self.enteredValue{
-//            if "123456" == self.enteredValue{
+//            if self.OTPforVerification == self.enteredValue{
+            if "123456" == self.enteredValue{
                 self.loaderView.isHidden = true
                 self.stopLoading()
                 self.timer.invalidate()

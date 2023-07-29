@@ -60,7 +60,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
     var VM = RedemptionsCatalogueListViewModel()
     var searchText = ""
     var categoryId = -1
-    //let pointBalance = UserDefaults.standard.value(forKey: "RedeemablePointBalance")
+    let pointBalance1 = UserDefaults.standard.string(forKey: "TotalRedeemedPoints")
     var pointBalance = UserDefaults.standard.integer(forKey: "RedeemablePointBalance")
     //let pointBalance = UserDefaults.standard.value(forKey: "RedeemablePointBalance")
     let loyaltyId = UserDefaults.standard.string(forKey: "LoyaltyID") ?? ""
@@ -90,7 +90,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
         print(self.pointBalance)
         self.VM.redemptionCategoryArray.removeAll()
         self.VM.redemptionCatalogueArray.removeAll()
-        self.redeemablePts.text = "\(pointBalance)"
+        self.redeemablePts.text = "\(Double(pointBalance1 ?? "0")!)"
         self.searchTab = 1
         self.productTableView.delegate = self
         self.productTableView.dataSource = self
@@ -226,6 +226,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
         self.searchTab = 1
         self.categoriesId = 0
         self.sortedBy = 0
+        self.categoryId = -1
         self.highToLowBtn.setTitle("Low To High", for: .normal)
         self.VM.redemptionCategoryArray.removeAll()
         self.VM.redemptionCatalogueArray.removeAll()
@@ -383,7 +384,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
                                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                                     vc!.delegate = self
                                     vc!.titleInfo = ""
-                                    vc!.descriptionInfo = "You are not allowed to redeem. Please contact your adminstration"
+                                    vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
                                     vc!.modalPresentationStyle = .overCurrentContext
                                     vc!.modalTransitionStyle = .crossDissolve
                                     self.present(vc!, animated: true, completion: nil)
@@ -437,6 +438,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
             vc.catalogueId = self.VM.redemptionCatalogueArray[tappedIndex.row].catalogueId ?? 0
             vc.selectedPtsRange = self.selectedPtsRange
             vc.categoryId = self.categoryId
+            vc.isRedamable = self.VM.redemptionCatalogueArray[tappedIndex.row].is_Redeemable ?? 1
             //                vc.tdspercentage1 = self.VM.redemptionCatalogueArray[indexPath.row].TDSPercentage ?? 0.0
             //                vc.applicabletds = self.VM.redemptionCatalogueArray[indexPath.row].ApplicableTds ?? 0.0
             vc.isPlanner = self.VM.redemptionCatalogueArray[tappedIndex.row].isPlanner
@@ -651,6 +653,7 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
         self.VM.addToPlanners(parameters: parameters) { response in
             
             if response?.returnValue ?? 0 >= 1{
+                self.VM.redemptionCatalogueArray.removeAll()
                 self.redemptionCategoryList()
                 //   self.redemptionCatalogueList()
                 self.plannerListing()

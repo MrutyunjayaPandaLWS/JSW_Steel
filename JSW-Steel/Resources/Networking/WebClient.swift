@@ -32,10 +32,16 @@ final class WebClient {
                 object = data
             }
             if let httpResponse = response as? HTTPURLResponse, (200..<300) ~= httpResponse.statusCode {
+                print(httpResponse.statusCode,"status code")
+                
                 completion(object, nil)
             } else {
-                let error = (object as? JSON).flatMap(ServiceError.init) ?? ServiceError.other
-                completion(nil, error)
+                if let httpResponse = response as? HTTPURLResponse, 401 == httpResponse.statusCode{
+                    print(httpResponse.statusCode,"status code")
+                }else{
+                    let error = (object as? JSON).flatMap(ServiceError.init) ?? ServiceError.other
+                    completion(nil, error)
+                }
             }
         }
         

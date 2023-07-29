@@ -47,7 +47,7 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
    
     @IBOutlet weak var submitLbl: UILabel!
     var VM = LoginViewModel()
-    var boolResult:Bool = false
+    var boolResult:Bool = true
     var pushID = UserDefaults.standard.string(forKey: "TOKEN") ?? ""
     let loyaltyId = UserDefaults.standard.string(forKey: "LoyaltyID") ?? ""
     var itsFrom = ""
@@ -76,7 +76,7 @@ class MSP_LoginVC: BaseViewController, popUpDelegate, CheckBoxSelectDelegate,UIT
         loginView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.loginView.clipsToBounds = true
         self.checkMarkButton.setImage(UIImage(named: "Rectangle 18"), for: .normal)
-        self.boolResult = false
+        self.boolResult = true
         
     }
     override func viewWillAppear(_ animated: Bool) {

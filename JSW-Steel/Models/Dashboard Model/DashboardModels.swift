@@ -23,7 +23,7 @@ struct DashboardModels : Codable {
 	let lstCustomerFeedBackJsonApi : [LstCustomerFeedBackJsonApi]?
 	let lstLoyaltyProgramReport : [LstLoyaltyProgramReport]?
 	let objImageGalleryList : String?
-	let objCatalogueDetailsForCustomer : String?
+	let objCatalogueDetailsForCustomer : [ObjCatalogueDetailsForCustomer]?
 	let activeStatus : Bool?
 	let objProductList : String?
 	let sessionID : String?
@@ -72,7 +72,7 @@ struct DashboardModels : Codable {
 		lstCustomerFeedBackJsonApi = try values.decodeIfPresent([LstCustomerFeedBackJsonApi].self, forKey: .lstCustomerFeedBackJsonApi)
 		lstLoyaltyProgramReport = try values.decodeIfPresent([LstLoyaltyProgramReport].self, forKey: .lstLoyaltyProgramReport)
 		objImageGalleryList = try values.decodeIfPresent(String.self, forKey: .objImageGalleryList)
-		objCatalogueDetailsForCustomer = try values.decodeIfPresent(String.self, forKey: .objCatalogueDetailsForCustomer)
+        objCatalogueDetailsForCustomer = try values.decodeIfPresent([ObjCatalogueDetailsForCustomer].self, forKey: .objCatalogueDetailsForCustomer)
 		activeStatus = try values.decodeIfPresent(Bool.self, forKey: .activeStatus)
 		objProductList = try values.decodeIfPresent(String.self, forKey: .objProductList)
 		sessionID = try values.decodeIfPresent(String.self, forKey: .sessionID)

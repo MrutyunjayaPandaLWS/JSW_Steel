@@ -439,12 +439,12 @@ extension MSP_SideMenuViewController : UITableViewDataSource, UITableViewDelegat
 //
 //            }
 //        }
-        else if sender.tag == 14{
+        else if sender.tag == 15{
             self.closeLeft()
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_FAQ") as! MSP_FAQ
             vc.fromSideMenu = "SideMenu"
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if sender.tag == 15{
+        }else if sender.tag == 16{
             self.closeLeft()
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TermsAndConditionsVC") as! TermsAndConditionsVC
             vc.fromSideMenu = "SideMenu"

@@ -285,6 +285,7 @@
 		84749EB829F6616B005D390C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84749DA129F6616A005D390C /* LoginViewModel.swift */; };
 		84749EB929F6616B005D390C /* MyRedemptionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84749DA429F6616A005D390C /* MyRedemptionsListViewModel.swift */; };
 		84749EBA29F6616B005D390C /* MSP_ClaimStatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84749DA629F6616A005D390C /* MSP_ClaimStatusVM.swift */; };
+		84EA9ED42A722FAF003EF3D2 /* ObjCatalogueDetailsForCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA9ED32A722FAF003EF3D2 /* ObjCatalogueDetailsForCustomer.swift */; };
 		84F332CA29F7F991008A8289 /* jspl-faq-eng.html in Resources */ = {isa = PBXBuildFile; fileRef = 84F332C929F7F991008A8289 /* jspl-faq-eng.html */; };
 /* End PBXBuildFile section */
 
@@ -589,6 +590,7 @@
 		84749DA129F6616A005D390C /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		84749DA429F6616A005D390C /* MyRedemptionsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRedemptionsListViewModel.swift; sourceTree = "<group>"; };
 		84749DA629F6616A005D390C /* MSP_ClaimStatusVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSP_ClaimStatusVM.swift; sourceTree = "<group>"; };
+		84EA9ED32A722FAF003EF3D2 /* ObjCatalogueDetailsForCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCatalogueDetailsForCustomer.swift; sourceTree = "<group>"; };
 		84F332C929F7F991008A8289 /* jspl-faq-eng.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "jspl-faq-eng.html"; sourceTree = "<group>"; };
 		D8184D5E98A98F93C10C9CC8 /* Pods-JSW-Steel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSW-Steel.debug.xcconfig"; path = "Target Support Files/Pods-JSW-Steel/Pods-JSW-Steel.debug.xcconfig"; sourceTree = "<group>"; };
 		FAFFE818AA86E86A61FC6EBF /* Pods-JSW-Steel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSW-Steel.release.xcconfig"; path = "Target Support Files/Pods-JSW-Steel/Pods-JSW-Steel.release.xcconfig"; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 				84272E1F29F6B3080024282D /* LstLoyaltyProgramReport.swift */,
 				84272E1B29F6B3080024282D /* LstPromotionListJsonApi.swift */,
 				84272E1C29F6B3080024282D /* ObjActivityDetailsJsonList.swift */,
+				84EA9ED32A722FAF003EF3D2 /* ObjCatalogueDetailsForCustomer.swift */,
 				84272E1D29F6B3080024282D /* ObjCustomerDashboardList.swift */,
 			);
 			path = "Dashboard Model";
@@ -2551,6 +2554,7 @@
 				84749DF829F6616B005D390C /* LstLoyaltyProgramReport1.swift in Sources */,
 				84749E0D29F6616B005D390C /* SendSMSModel.swift in Sources */,
 				84749DAD29F6616A005D390C /* DistrictModels.swift in Sources */,
+				84EA9ED42A722FAF003EF3D2 /* ObjCatalogueDetailsForCustomer.swift in Sources */,
 				84749DDA29F6616A005D390C /* ObjPanDetailsRetrieverequest.swift in Sources */,
 				84749EB229F6616B005D390C /* DreamGiftListingViewModel.swift in Sources */,
 				84749EA429F6616B005D390C /* ForgotPasswordViewModel.swift in Sources */,
@@ -2863,9 +2867,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2HG885J5KS;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2HG885J5KS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "JSW-Steel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Nirman;
@@ -2883,6 +2889,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.loyaltyWorks.JSW-Steel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "JSW-Steel_Adhoc";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2896,9 +2903,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2HG885J5KS;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2HG885J5KS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "JSW-Steel/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Nirman;
@@ -2916,6 +2925,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.loyaltyWorks.JSW-Steel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "JSW-Steel_Adhoc";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

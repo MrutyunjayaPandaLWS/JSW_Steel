@@ -27,7 +27,7 @@ class MSP_RedemptionCatalgoueVC: BaseViewController, ViewTappedDelegate {
     
        @IBOutlet weak var loaderView: UIView!
     
-    
+    let pointBalance1 = UserDefaults.standard.string(forKey: "TotalRedeemedPoints")
     let redemptionBalance = UserDefaults.standard.integer(forKey: "RedeemablePointBalance")
     var viewArray = ["View"]
     var VM1 = HistoryNotificationsViewModel()
@@ -38,7 +38,7 @@ class MSP_RedemptionCatalgoueVC: BaseViewController, ViewTappedDelegate {
         super.viewDidLoad()
         self.loaderView.isHidden = true
         print(redemptionBalance ?? 0,"Balance")
-        self.totalPoints.text = "\(redemptionBalance ?? 0)"
+        self.totalPoints.text = "\(Double(pointBalance1 ?? "0")!)"
         self.redemptionCatalogueTableView.register(UINib(nibName: "MSP_RedemptionCatalogueTVC", bundle: nil), forCellReuseIdentifier: "MSP_RedemptionCatalogueTVC")
         redemptionCatalogueTableView.delegate = self
         redemptionCatalogueTableView.dataSource = self

@@ -256,7 +256,7 @@ class MSP_ClaimStatusVC: BaseViewController, DateSelectedDelegate, popUpDelegate
     
    // {"ActionType":4,"ActiveStatus":"-2","FromDate":"","PageSize":8,"SalesPersonId":"MSP000327","StartIndex":1,"ToDate":""}
     func claimPointsApi(startIndex: Int) {
-        self.VM.claimStatusArray.removeAll()
+//        self.VM.claimStatusArray.removeAll()
         let parameters = [
             "ActionType": 11,
             "ActiveStatus": "\(self.selectedStatusId)",

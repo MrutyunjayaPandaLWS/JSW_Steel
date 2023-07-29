@@ -31,7 +31,7 @@ class MSP_NotificationVC: BaseViewController {
         self.notificationListTableView.delegate = self
         self.notificationListTableView.dataSource = self
         self.notificationListTableView.separatorStyle = .none
-        
+        self.noDataFoundLbl.isHidden = true
         self.loaderView.isHidden = false
         self.lottieAnimation(animationView: self.loaderAnimatedView)
         DispatchQueue.main.asyncAfter(deadline: .now()+0.9, execute: {

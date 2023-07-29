@@ -28,7 +28,7 @@ class MSP_EditAddressVC: BaseViewController, UITextFieldDelegate, DropDownDelega
         self.selectedState = vc.selectedState
         self.selectedCityID = 0
         self.selectedCityIdProtocol = 0
-        self.cityButton.setTitle("Select City", for: .normal)
+        self.cityButton.setTitle("Select District", for: .normal)
     }
     
     func cityDidTap(_ vc: MSP_DropDownVC) {
@@ -181,7 +181,7 @@ class MSP_EditAddressVC: BaseViewController, UITextFieldDelegate, DropDownDelega
             }else{
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_DropDownVC") as? MSP_DropDownVC
                 vc!.delegate = self
-                vc!.isComeFrom = 2
+                vc!.isComeFrom = 11
                 vc!.stateIDfromPreviousScreen = selectedStateID
                 vc!.modalPresentationStyle = .overCurrentContext
                 vc!.modalTransitionStyle = .crossDissolve

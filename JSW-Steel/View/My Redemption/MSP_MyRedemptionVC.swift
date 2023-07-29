@@ -226,7 +226,7 @@ class MSP_MyRedemptionVC: BaseViewController, DateSelectedDelegate, popUpDelegat
     @IBAction func selectStatusActBtn(_ sender: Any) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_DropDownVC") as? MSP_DropDownVC
         vc!.delegate = self
-        vc!.isComeFrom = 8
+        vc!.isComeFrom = 10
         vc!.modalPresentationStyle = .overCurrentContext
         vc!.modalTransitionStyle = .crossDissolve
         self.present(vc!, animated: true, completion: nil)

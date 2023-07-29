@@ -24,89 +24,68 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
     func popupAlertDidTap(_ vc: PopupAlertOne_VC) {}
     
     func qtyValue(_ cell: MSP_ClaimPointsTVC) {
+       
         guard let tappedIndexPath = self.claimPointListTableView.indexPath(for: cell) else{return}
-        
-        
+        if self.claimPointsDetailsArray.count != 0{
+            for data in self.claimPointsDetailsArray{
+                if self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0 == Int(data.productId!) ?? -1{
+                    if let index = self.VM.myClaimsPointsArray.firstIndex(where: {$0.cat_Id1 ?? 0 == Int(data.productId ?? "") ?? -1} ) {
+                        print(index)
+                        let remove = self.claimPointsDetailsArray[index]
+                        print(remove)
+                        print("Existing Cart Address Remove")
+                        persistanceservice.context.delete(remove)
+                        persistanceservice.saveContext()
+                        self.fetchCartDetails()
+                    }
+                }
+            }
+        }
         
         if cell.qtyTF.tag == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1 {
             print(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1, "Product Id")
             let finalValues = cell.remarksTF.text ?? ""
             let finalValue = Double(cell.qtyTF.text ?? "0") ?? 0
-            
-            
-//            if finalValue  == "0" || finalValue == "0.0" || finalValue == "0.00" || finalValue == "0.000" || finalValue == "00.0" || finalValue == "0.0" || finalValue == "00" || finalValue == "000" || finalValue == "0000" || finalValue == "00000" || finalValue == "000000" || finalValue == "000000" || finalValue == "00000000"{
-            if finalValue  == 0{
-                self.view.makeToast("Enter valid quantity", duration: 2.0, position: .bottom)
-                cell.qtyTF.text = ""
-                
-                for data in self.claimPointsDetailsArray{
-                    if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
-                        data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
-                        data.productCode = ""
-                        data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
-                        data.qunantity = cell.qtyTF.text ?? ""
-                        data.quantityKG = ""
-                        data.remarks = "\(finalValues)"
-                        persistanceservice.saveContext()
-                        self.fetchCartDetails()
-                        }
-                    }
-                
-            }
-//            else if finalValue == "" || finalValue == " " || finalValue == "  " || finalValue == "   "{
-//                self.view.makeToast("Enter quantity", duration: 2.0, position: .bottom)
-//                cell.qtyTF.text = ""
-//                for data in self.claimPointsDetailsArray{
-//                    if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
-//                        data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
-//                        data.productCode = ""
-//                        data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
-//                        data.qunantity = cell.qtyTF.text ?? ""
-//                        data.quantityKG = ""
-//                        data.remarks = "\(finalValues)"
-//                        persistanceservice.saveContext()
-//                        self.fetchCartDetails()
-//                        }
-//                    }
-//            }
-//            else if finalValue != "" && finalValue != "0" && finalValue != " " && finalValue != "-1" && finalValue != "00" && finalValue != "000" && finalValue != "0000"  && finalValue != "0000" && finalValue != "00000" && finalValue != "000000" && finalValue != "0000000" && finalValue != "00000000" && finalValue != "000000000" && finalValue != "0000000000" {
-            if finalValue  > 0{
-                let calcValue = finalValue
-                print(calcValue)
-                if calcValue >= 0{
-                    
-                    let filterArray = self.claimPointsDetailsArray.filter{$0.productId ?? "" == "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"}
-                    if filterArray.count == 0{
-                        let selectedQty = ClaimPointsArray(context: persistanceservice.context)
-                        selectedQty.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
-                        selectedQty.productCode = ""
-                        selectedQty.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
-                        selectedQty.qunantity = cell.qtyTF.text ?? ""
-                        selectedQty.quantityKG = ""
-                        selectedQty.remarks = "\(finalValues)"
-                        persistanceservice.saveContext()
-                        self.fetchCartDetails()
-                    }else{
-                        for data in self.claimPointsDetailsArray{
-                            if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
-                                data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
-                                data.productCode = ""
-                                data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
-                                data.qunantity = cell.qtyTF.text ?? ""
-                                data.quantityKG = ""
-                                data.remarks = "\(finalValues)"
-                                persistanceservice.saveContext()
-                                self.fetchCartDetails()
+            if cell.qtyTF.text != ""{
+                if finalValue  > 0{
+                    let calcValue = finalValue
+                    print(calcValue)
+                    if calcValue >= 0{
+                        
+                        let filterArray = self.claimPointsDetailsArray.filter{$0.productId ?? "" == "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"}
+                        if filterArray.count == 0{
+                            let selectedQty = ClaimPointsArray(context: persistanceservice.context)
+                            selectedQty.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
+                            selectedQty.productCode = ""
+                            selectedQty.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
+                            selectedQty.qunantity = cell.qtyTF.text ?? ""
+                            selectedQty.quantityKG = ""
+                            selectedQty.remarks = "\(finalValues)"
+                            persistanceservice.saveContext()
+                            self.fetchCartDetails()
+                        }else{
+                            for data in self.claimPointsDetailsArray{
+                                if Int(data.productId ?? "0")! == self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? 0{
+                                    data.productName = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].productName ?? "")"
+                                    data.productCode = ""
+                                    data.productId = "\(self.VM.myClaimsPointsArray[tappedIndexPath.row].cat_Id1 ?? -1)"
+                                    data.qunantity = cell.qtyTF.text ?? ""
+                                    data.quantityKG = ""
+                                    data.remarks = "\(finalValues)"
+                                    persistanceservice.saveContext()
+                                    self.fetchCartDetails()
                                 }
                             }
+                        }
+                        
+                    }else{
+                        self.view.makeToast("Enter valid quantity", duration: 2.0, position: .bottom)
+                        cell.qtyTF.text = ""
                     }
-                           
                 }else{
-                    self.view.makeToast("Enter valid quantity", duration: 2.0, position: .bottom)
-                    cell.qtyTF.text = ""
-                    }
-            }else{
-                self.view.makeToast("Something went wrong! Try again later...", duration: 2.0, position: .bottom)
+                    self.view.makeToast("Something went wrong! Try again later...", duration: 2.0, position: .bottom)
+                }
+                
             }
         }
     }
@@ -397,7 +376,7 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
         self.newproductArray.removeAll()
         for data in self.claimPointsDetailsArray{
             print(data.qunantity!)
-            if Int(data.qunantity ?? "") ?? 0 > 0 {
+            if Double(data.qunantity ?? "") ?? 0 > 0 {
                 let collectedValues:[String:Any] = [
                     "Cat1": "\(data.productId ?? "")",
                     "Quantity": "\(data.qunantity ?? "")",
@@ -430,7 +409,7 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
                     
                     let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_ClaimPointsPopUpVC") as! MSP_ClaimPointsPopUpVC
                     vc.modalTransitionStyle = .coverVertical
-                    vc.modalPresentationStyle = .fullScreen
+                    vc.modalPresentationStyle = .overFullScreen
                     self.present(vc, animated: true, completion: nil)
                 }else{
                     DispatchQueue.main.async{
@@ -439,7 +418,7 @@ class MSP_ClaimPointsVC: BaseViewController, DropDownDelegate, SendDetailsDelega
                         vc!.titleInfo = ""
                         vc!.itsComeFrom = "ClaimPointsSubmission"
                         vc!.descriptionInfo = "Claim points submission failed. Try again later!"
-                        vc!.modalPresentationStyle = .overCurrentContext
+                        vc!.modalPresentationStyle = .overFullScreen
                         vc!.modalTransitionStyle = .crossDissolve
                         self.present(vc!, animated: true, completion: nil)
                         

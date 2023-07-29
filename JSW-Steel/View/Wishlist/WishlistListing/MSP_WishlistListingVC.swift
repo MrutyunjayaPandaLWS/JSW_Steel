@@ -100,7 +100,7 @@ class MSP_WishlistListingVC: BaseViewController, RedemptionPlannerDelegate, popU
         vc.averageLesserDate = self.VM.myPlannerListArray[tappedIndex.row].avgLesserExpDate ?? ""
         vc.redeemableAverageEarning = self.VM.myPlannerListArray[tappedIndex.row].redeemableAverageEarning ?? ""
         vc.dateOfSubmission = self.VM.myPlannerListArray[tappedIndex.row].achievementDateMonthWize ?? ""
-        //vc.isRedeem = self.VM.myPlannerListArray[tappedIndex.row].is_Redeemable ?? 0
+        vc.isRedeem = self.VM.myPlannerListArray[tappedIndex.row].is_Redeemable ?? 0
         let calcValue =  ((self.VM.myPlannerListArray[tappedIndex.row].pointsRequired ?? 0) - (Int(pointBalance) ?? 0))
         print(calcValue)
         vc.requiredPoints = calcValue
@@ -118,6 +118,17 @@ class MSP_WishlistListingVC: BaseViewController, RedemptionPlannerDelegate, popU
     func productRedeem(_ cell: MSP_WishListTVC) {
         self.selectedPlannerID = -1
         guard let tappedIndex = WishlistTableView.indexPath(for: cell) else{return}
+        if self.VM.myPlannerListArray[tappedIndex.row].is_Redeemable != 1{
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else
         if cell.productRedeemBTN.tag == tappedIndex.row{
             let filterCategory = self.VM.myCartListArray.filter { $0.catalogueId == self.VM.myPlannerListArray[tappedIndex.row].catalogueId ?? 0}
             if filterCategory.count > 0{

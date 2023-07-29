@@ -177,7 +177,10 @@ class MSP_DashboardVC: BaseViewController, popUpDelegate{
     @IBAction func helplineBTN(_ sender: Any) {
         
 //        let vc = storyboard?.instantiateViewController(withIdentifier: "MSP_LodgeQueryVC") as! MSP_LodgeQueryVC
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MSP_Support") as! MSP_Support
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_LodgeQueryVC") as! MSP_LodgeQueryVC
+//        vc.fromSideMenu = "SideMenu"
+//        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "MSP_Support") as! MSP_Support
         vc.hidesBottomBarWhenPushed = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -904,6 +907,7 @@ extension MSP_DashboardVC: CropperViewControllerDelegate {
     self.dismiss(animated: true, completion: nil)
     }
 }
+
 
 
 

@@ -112,7 +112,7 @@ class MSP_PointStatementVC: BaseViewController , DateSelectedDelegate, popUpDele
      
         if customerTypeId as! Int == 51{
             //Contractor
-            self.frequenctmultiOutBtn.isHidden = false
+            self.frequenctmultiOutBtn.isHidden = true
             self.consistencyOutBtn.isHidden = true
             self.volumeOutBtn.isHidden = true
             self.rangeMultiOutBtn.isHidden = true
@@ -178,7 +178,7 @@ class MSP_PointStatementVC: BaseViewController , DateSelectedDelegate, popUpDele
     
     @IBAction func todayBtn(_ sender: Any) {
         
-        let yesterday = "\(Calendar.current.date(byAdding: .day, value: 1, to: Date())!)"
+        let yesterday = "\(Calendar.current.date(byAdding: .day, value: 0, to: Date())!)"
         let today = yesterday.split(separator: " ")
         let desiredDateFormat = convertDateFormater("\(today[0])", fromDate: "yyyy-MM-dd", toDate: "yyyy-MM-dd")
         self.fromDateLbl.text = "\(desiredDateFormat)"
@@ -206,7 +206,7 @@ class MSP_PointStatementVC: BaseViewController , DateSelectedDelegate, popUpDele
     
     @IBAction func yesterDateActBtn(_ sender: Any) {
         let today = Date().description.split(separator: " ")
-        let yesterday = "\(Calendar.current.date(byAdding: .day, value: 0, to: Date())!)"
+        let yesterday = "\(Calendar.current.date(byAdding: .day, value: -1, to: Date())!)"
         let chanegeFormate = yesterday.split(separator: " ")
         let desiredDateFormat = convertDateFormater("\(chanegeFormate[0])", fromDate: "yyyy-MM-dd", toDate: "yyyy-MM-dd")
         let desiredDate = convertDateFormater("\(today[0])", fromDate: "yyyy-MM-dd", toDate: "yyyy-MM-dd")

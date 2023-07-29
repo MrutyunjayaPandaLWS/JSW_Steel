@@ -93,6 +93,7 @@ struct CatalogueSaveCartDetailListResponse1 : Codable {
     let applicableTds : Double?
     let sumOfRedeemableWithTDS : Double?
     let is_Redeemable : Int?
+    let is_CartRedeemable : Int?
     let catogoryId : Int?
     let catalogueBrandId : Int?
     let catalogueBrandName : String?
@@ -217,6 +218,7 @@ struct CatalogueSaveCartDetailListResponse1 : Codable {
         case applicableTds = "applicableTds"
         case sumOfRedeemableWithTDS = "sumOfRedeemableWithTDS"
         case is_Redeemable = "is_Redeemable"
+        case is_CartRedeemable = "is_CartRedeemable"
         case catogoryId = "catogoryId"
         case catalogueBrandId = "catalogueBrandId"
         case catalogueBrandName = "catalogueBrandName"
@@ -342,6 +344,7 @@ struct CatalogueSaveCartDetailListResponse1 : Codable {
         applicableTds = try values.decodeIfPresent(Double.self, forKey: .applicableTds)
         sumOfRedeemableWithTDS = try values.decodeIfPresent(Double.self, forKey: .sumOfRedeemableWithTDS)
         is_Redeemable = try values.decodeIfPresent(Int.self, forKey: .is_Redeemable)
+        is_CartRedeemable = try values.decodeIfPresent(Int.self, forKey: .is_CartRedeemable)
         catogoryId = try values.decodeIfPresent(Int.self, forKey: .catogoryId)
         catalogueBrandId = try values.decodeIfPresent(Int.self, forKey: .catalogueBrandId)
         catalogueBrandName = try values.decodeIfPresent(String.self, forKey: .catalogueBrandName)

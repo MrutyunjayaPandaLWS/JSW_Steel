@@ -69,6 +69,7 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
     var checkAccountStatus = UserDefaults.standard.string(forKey: "SemiActiveAccount") ?? ""
     var tdspercentage1 = 0.0
     var applicabletds = 0.0
+    var isRedeem = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.VM.VC = self
@@ -184,13 +185,23 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
     }
     @IBAction func redeemButton(_ sender: Any) {
         
- 
-        print(self.selectedCatalogueID)
-        for data in self.VM.myCartListArray{
-            print(data.catalogueId!, "sadjfkljsadfkjsadlfjasdf")
-        }
-        
-        let filterCategory = self.VM.myCartListArray.filter { $0.catalogueId == self.selectedCatalogueID}
+        if isRedeem != 1{
+            DispatchQueue.main.async{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                vc!.delegate = self
+                vc!.titleInfo = ""
+                vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+                vc!.modalPresentationStyle = .overCurrentContext
+                vc!.modalTransitionStyle = .crossDissolve
+                self.present(vc!, animated: true, completion: nil)
+            }
+        }else{
+            print(self.selectedCatalogueID)
+            for data in self.VM.myCartListArray{
+                print(data.catalogueId!, "sadjfkljsadfkjsadlfjasdf")
+            }
+            
+            let filterCategory = self.VM.myCartListArray.filter { $0.catalogueId == self.selectedCatalogueID}
             
             if filterCategory.count > 0{
                 DispatchQueue.main.async{
@@ -198,7 +209,7 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
                     vc!.delegate = self
                     vc!.titleInfo = ""
                     
-                        vc!.descriptionInfo = "Product is already added in the Redeem list"
+                    vc!.descriptionInfo = "Product is already added in the Redeem list"
                     
                     vc!.modalPresentationStyle = .overCurrentContext
                     vc!.modalTransitionStyle = .crossDissolve
@@ -211,7 +222,7 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
                     let calcValue = self.totalCartValue + Int(self.productPoints)
                     if calcValue <= Int(self.pointBalance) {
                         if self.verifiedStatus != 1{
-                          
+                            
                             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                             vc!.delegate = self
                             vc!.titleInfo = ""
@@ -219,25 +230,25 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
                             vc!.modalPresentationStyle = .overCurrentContext
                             vc!.modalTransitionStyle = .crossDissolve
                             self.present(vc!, animated: true, completion: nil)
-                          
+                            
                         }else{
                             self.addToCartApi()
-                           
+                            
                         }
                     }else{
                         DispatchQueue.main.async{
                             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                             vc!.delegate = self
                             vc!.titleInfo = ""
-                          //  if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "1"{
-                                vc!.descriptionInfo = "Insufficent Point Balance"
-//                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "2"{
-//                                vc!.descriptionInfo = "अपर्याप्त अंक संतुलन"
-//                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "3"{
-//                                vc!.descriptionInfo = "অপর্যাপ্ত পয়েন্ট ব্যালেন্স"
-//                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "4"{
-//                                vc!.descriptionInfo = "సరిపోని పాయింట్లు బ్యాలెన్స్"
-//                            }
+                            //  if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "1"{
+                            vc!.descriptionInfo = "Insufficent Point Balance"
+                            //                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "2"{
+                            //                                vc!.descriptionInfo = "अपर्याप्त अंक संतुलन"
+                            //                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "3"{
+                            //                                vc!.descriptionInfo = "অপর্যাপ্ত পয়েন্ট ব্যালেন্স"
+                            //                            }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "4"{
+                            //                                vc!.descriptionInfo = "సరిపోని పాయింట్లు బ్యాలెన్స్"
+                            //                            }
                             vc!.modalPresentationStyle = .overCurrentContext
                             vc!.modalTransitionStyle = .crossDissolve
                             self.present(vc!, animated: true, completion: nil)
@@ -248,15 +259,15 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
                         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                         vc!.delegate = self
                         vc!.titleInfo = ""
-//                        if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "1"{
-                            vc!.descriptionInfo = "Insufficent Point Balance"
-//                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "2"{
-//                            vc!.descriptionInfo = "अपर्याप्त अंक संतुलन"
-//                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "3"{
-//                            vc!.descriptionInfo = "অপর্যাপ্ত পয়েন্ট ব্যালেন্স"
-//                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "4"{
-//                            vc!.descriptionInfo = "సరిపోని పాయింట్లు బ్యాలెన్స్"
-//                        }
+                        //                        if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "1"{
+                        vc!.descriptionInfo = "Insufficent Point Balance"
+                        //                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "2"{
+                        //                            vc!.descriptionInfo = "अपर्याप्त अंक संतुलन"
+                        //                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "3"{
+                        //                            vc!.descriptionInfo = "অপর্যাপ্ত পয়েন্ট ব্যালেন্স"
+                        //                        }else if UserDefaults.standard.string(forKey: "LanguageLocalizable") == "4"{
+                        //                            vc!.descriptionInfo = "సరిపోని పాయింట్లు బ్యాలెన్స్"
+                        //                        }
                         vc!.modalPresentationStyle = .overCurrentContext
                         vc!.modalTransitionStyle = .crossDissolve
                         self.present(vc!, animated: true, completion: nil)
@@ -264,9 +275,9 @@ class MSP_WishlistDetailsVC: BaseViewController, popUpDelegate {
                 }
                 
             }
-        
-        
-             }
+            
+        }
+    }
     @IBAction func removeButton(_ sender: Any) {
         removeProductInPlanner()
     }

@@ -60,6 +60,7 @@ class MSP_DropDownVC: BaseViewController{
     var statusListArray = ["Pending","Approved","Rejected", "Escalated","Escalated to Admin"]
     var selectedStatusName = ""
     var selectedStatusId = -1
+    var myRedemptionStatulListArray = [StatusModels]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.VM.VC = self
@@ -85,6 +86,12 @@ class MSP_DropDownVC: BaseViewController{
              self.myRedemptionStatusApi()
          }else if isComeFrom == 9{
              self.lodgeQueryStatusApi()
+         }else if isComeFrom == 10{
+             setUpRedeemptionStatusList()
+             self.heightOfTable.constant = CGFloat(self.myRedemptionStatulListArray.count * 40)
+             self.dropDownTableView.reloadData()
+         }else if isComeFrom == 11{
+             self.districtListingAPI(stateID: stateIDfromPreviousScreen)
          }
         print(isComeFrom, "isComeFrom")
     }
@@ -95,6 +102,14 @@ class MSP_DropDownVC: BaseViewController{
             {
                 self.dismiss(animated: true, completion: nil) }
         }
+    
+    func setUpRedeemptionStatusList(){
+        myRedemptionStatulListArray.append(StatusModels(statusName: "Pending", statusID: 0))
+        myRedemptionStatulListArray.append(StatusModels(statusName: "Processed", statusID: 2))
+        myRedemptionStatulListArray.append(StatusModels(statusName: "Delivered", statusID: 4))
+        myRedemptionStatulListArray.append(StatusModels(statusName: "Cancelled", statusID: 3))
+        myRedemptionStatulListArray.append(StatusModels(statusName: "Out for Delivery", statusID: 11))
+    }
     func customerTypeApi(){
         let parametersJSON = [
             "ActionType":"33",
@@ -128,6 +143,14 @@ class MSP_DropDownVC: BaseViewController{
         ] as  [String:Any]
         print(parameterJSON)
         self.VM.statelisting(parameters: parameterJSON)
+    }
+    
+    func districtListingAPI(stateID: Int){
+        let parameterJSON = [
+            "StateId":"\(stateIDfromPreviousScreen)"
+        ] as  [String:Any]
+        print(parameterJSON)
+        self.VM.districtlisting(parameters: parameterJSON)
     }
 
     func cityListingAPI(stateID: Int){
@@ -227,6 +250,10 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
             return self.statusListArray.count
         }else if isComeFrom == 8 || isComeFrom == 9{
             return self.VM.myRedemptionListArray.count
+        }else if isComeFrom == 10{
+            return self.myRedemptionStatulListArray.count
+        }else if isComeFrom == 11{
+            return self.VM.districtArray.count
         }else{
             return 0
         }
@@ -250,6 +277,10 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
             cell!.dropdownInfo.text = self.statusListArray[indexPath.row]
         }else if isComeFrom == 8 || isComeFrom == 9{
             cell!.dropdownInfo.text = self.VM.myRedemptionListArray[indexPath.row].attributeValue ?? ""
+        }else if isComeFrom == 10{
+            cell!.dropdownInfo.text = self.myRedemptionStatulListArray[indexPath.row].statusName
+        }else if isComeFrom == 11{
+            cell?.dropdownInfo.text =  self.VM.districtArray[indexPath.row].districtName
         }
         return cell!
     }
@@ -292,7 +323,7 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
             }else if self.selectedStatusName == "Rejected"{
                 self.selectedStatusId = -1
             }else if self.selectedStatusName == "Escalated"{
-                self.selectedStatusId = 2
+                self.selectedStatusId = 5
             }else if self.selectedStatusName == "Escalated to Admin"{
                 self.selectedStatusId = 2
             }
@@ -310,6 +341,16 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
             self.delegate?.redemptionStatusDidTap(self)
             self.dismiss(animated: true, completion: nil)
             
+        }else if isComeFrom == 10{
+            self.selectedRedemptionStatus = self.myRedemptionStatulListArray[indexPath.row].statusName
+            self.seletedRedemptionStatusId = self.myRedemptionStatulListArray[indexPath.row].statusID
+            self.delegate?.redemptionStatusDidTap(self)
+            self.dismiss(animated: true, completion: nil)
+        }else if isComeFrom == 11{
+            self.selectedCity = self.VM.districtArray[indexPath.row].districtName ?? ""
+            self.selectedCityID = self.VM.districtArray[indexPath.row].districtId ?? -1
+            self.delegate?.cityDidTap(self)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -318,3 +359,7 @@ extension MSP_DropDownVC: UITableViewDataSource, UITableViewDelegate{
 
 }
     
+struct StatusModels{
+    var statusName :  String
+    var statusID: Int
+}

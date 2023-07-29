@@ -73,6 +73,7 @@ class MSP_ProductCatalogueDetailsVC: BaseViewController, popUpDelegate {
     var VM = CatalogueDetailsViewModel()
     var VM1 = HistoryNotificationsViewModel()
     var selectedPtsRange = ""
+    var isRedamable = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.VM.VC = self
@@ -159,8 +160,22 @@ class MSP_ProductCatalogueDetailsVC: BaseViewController, popUpDelegate {
             //                let calcValues = self.totalCartValue + Int(self.productPoints)!
             //                print(calcValues)
             if Int(productPoints) ?? 0 <= Int(pointBalance) ?? 0 {
+                if isRedamable == 1{
+                    addToCartApi()
+                }else{
+                    DispatchQueue.main.async{
+                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
+                        vc!.delegate = self
+                        vc!.titleInfo = ""
+                        vc!.descriptionInfo = "Please submit your Aadhar card to proceed for redemption"
+                        vc!.modalPresentationStyle = .overCurrentContext
+                        vc!.modalTransitionStyle = .crossDissolve
+                        self.present(vc!, animated: true, completion: nil)
+                    }
+                }
+                
             //if Int(productPoints) ?? 0 <= Int(pointBalance) ?? 0 {
-                addToCartApi()
+                
             }else{
                 DispatchQueue.main.async{
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
