@@ -882,8 +882,8 @@
             filePath = "JSW-Steel/View/Redemption Catalogue/CatalogueList/MSP_ProductCatalogueVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "addToCart(_:)"
             landmarkType = "7">
             <Locations>
@@ -930,8 +930,8 @@
             filePath = "JSW-Steel/View/Redemption Catalogue/CatalogueList/MSP_ProductCatalogueVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "addToCart(_:)"
             landmarkType = "7">
             <Locations>

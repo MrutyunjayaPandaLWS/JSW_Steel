@@ -112,12 +112,14 @@ class MSP_ProductCatalogueVC: BaseViewController, AddedToCartOrPlannerDelegate, 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.loaderView.isHidden = true
 
    //     self.VM.redemptionCataloguesArray.removeAll()
         self.redemptionCategoryList()
        
         self.plannerListing()
+        self.totalCartValue = 0
         self.myCartList()
      //   self.notificationListApi()
         
@@ -745,11 +747,11 @@ extension MSP_ProductCatalogueVC: UITableViewDelegate, UITableViewDataSource {
         }
         if filterPlannerList.count > 0 {
             if Int(pointBalance) > Int(productPoints) {
-//                cell.addedToCart.isHidden = true
-//                cell.addToPlanner.isHidden = true
-//                cell.addToCartButton.isHidden = false
-//                cell.addedToPlanner.isHidden = true
-//                cell.wishPlannerOutBTN.isHidden = true
+                cell.addedToCart.isHidden = true
+                cell.addToPlanner.isHidden = true
+                cell.addToCartButton.isHidden = false
+                cell.addedToPlanner.isHidden = true
+                cell.wishPlannerOutBTN.isHidden = true
             }else{
                 cell.addedToCart.isHidden = true
                 cell.addToPlanner.isHidden = true

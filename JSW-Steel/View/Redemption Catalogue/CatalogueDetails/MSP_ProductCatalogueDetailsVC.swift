@@ -100,6 +100,7 @@ class MSP_ProductCatalogueDetailsVC: BaseViewController, popUpDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.totalCartValue = 0
         self.loaderView.isHidden = true
         if self.subView.isHidden == false{
             self.subView.isHidden = true
@@ -157,9 +158,9 @@ class MSP_ProductCatalogueDetailsVC: BaseViewController, popUpDelegate {
             
         }else{
             //            if self.totalCartValue <= Int(pointBalance)!{
-            //                let calcValues = self.totalCartValue + Int(self.productPoints)!
+                            let calcValues = self.totalCartValue + Int(self.productPoints)!
             //                print(calcValues)
-            if Int(productPoints) ?? 0 <= Int(pointBalance) ?? 0 {
+            if calcValues  <= (Int(pointBalance) ?? 0) {
                 if isRedamable == 1{
                     addToCartApi()
                 }else{

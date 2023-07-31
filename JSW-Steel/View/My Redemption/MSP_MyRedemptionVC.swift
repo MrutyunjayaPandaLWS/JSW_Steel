@@ -425,16 +425,19 @@ extension MSP_MyRedemptionVC: UITableViewDelegate, UITableViewDataSource{
         return 200
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_MyRedemptionDetails") as? MSP_MyRedemptionDetails
-        vc?.quantity = self.VM.myRedemptionList[indexPath.row].quantity ?? 0
-        vc?.prodRefNo = self.VM.myRedemptionList[indexPath.row].redemptionRefno ?? ""
-        vc?.descData = self.VM.myRedemptionList[indexPath.row].productDesc ?? ""
-        vc?.termsandContions = self.VM.myRedemptionList[indexPath.row].termsCondition ?? ""
-        vc?.productName = self.VM.myRedemptionList[indexPath.row].productName ?? ""
-        vc?.catagryName = self.VM.myRedemptionList[indexPath.row].categoryName ?? ""
-        vc?.productImage = self.VM.myRedemptionList[indexPath.row].productImage ?? ""
-        vc?.productPoints = "\(self.VM.myRedemptionList[indexPath.row].pointsPerUnit ?? 0)"
-        self.navigationController?.pushViewController(vc!,animated: true)
+        let redemptionType = self.VM.myRedemptionList[indexPath.item].redemptionType
+        if redemptionType != 3 && redemptionType != 4 && redemptionType != 5{
+            let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MSP_MyRedemptionDetails") as? MSP_MyRedemptionDetails
+            vc?.quantity = self.VM.myRedemptionList[indexPath.row].quantity ?? 0
+            vc?.prodRefNo = self.VM.myRedemptionList[indexPath.row].redemptionRefno ?? ""
+            vc?.descData = self.VM.myRedemptionList[indexPath.row].productDesc ?? ""
+            vc?.termsandContions = self.VM.myRedemptionList[indexPath.row].termsCondition ?? ""
+            vc?.productName = self.VM.myRedemptionList[indexPath.row].productName ?? ""
+            vc?.catagryName = self.VM.myRedemptionList[indexPath.row].categoryName ?? ""
+            vc?.productImage = self.VM.myRedemptionList[indexPath.row].productImage ?? ""
+            vc?.productPoints = "\(self.VM.myRedemptionList[indexPath.row].pointsPerUnit ?? 0)"
+            self.navigationController?.pushViewController(vc!,animated: true)
+        }
         
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
