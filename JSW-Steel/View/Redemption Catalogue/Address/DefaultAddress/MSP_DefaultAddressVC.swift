@@ -23,7 +23,7 @@ class MSP_DefaultAddressVC: BaseViewController, SendUpdatedAddressDelegate, popU
         self.selectedpincode = vc.selectedpincode
         self.selectedCountryId = 15
         self.selectedCountry = "India"
-        self.contractorName = vc.selectedname
+//        self.contractorName = vc.selectedname
         self.customerAddressTV.text = "\(selectedname),\n\(self.selectedmobile),\n\(self.selectedaddress),\n\(self.selectedCity),\n\(self.selectedState),\n\(self.selectedCountry),\n\(self.selectedemail),\n\(self.selectedpincode)"
     }
     
@@ -131,7 +131,7 @@ class MSP_DefaultAddressVC: BaseViewController, SendUpdatedAddressDelegate, popU
         vc.selectedmobile = self.VM.defaultAddressArray[0].mobile ?? "-"
         vc.selectedState = self.VM.defaultAddressArray[0].stateName ?? "-"
         vc.selectedStateID = self.VM.defaultAddressArray[0].stateId ?? 0
-        vc.selectedCity = self.VM.defaultAddressArray[0].districtName ?? "-"
+        vc.selectedCity = self.VM.defaultAddressArray[0].districtName ?? "Select District"
         vc.selectedCityID = self.VM.defaultAddressArray[0].districtId ?? 0
         vc.selectedaddress = self.VM.defaultAddressArray[0].address1 ?? "-"
         vc.selectedpincode = self.VM.defaultAddressArray[0].zip ?? "-"
@@ -173,7 +173,7 @@ class MSP_DefaultAddressVC: BaseViewController, SendUpdatedAddressDelegate, popU
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PopupAlertOne_VC") as? PopupAlertOne_VC
                     vc!.delegate = self
                     vc!.titleInfo = ""
-                        vc!.descriptionInfo = "Shipping address requires: State,City,Address,Pin code and Mobile Number,details,Click on 'Edit' to edit and add details"
+                        vc!.descriptionInfo = "Shipping address requires: State,District,Address,Pin code and Mobile Number,details,Click on 'Edit' to edit and add details"
                    
                     vc!.modalPresentationStyle = .overCurrentContext
                     vc!.modalTransitionStyle = .crossDissolve

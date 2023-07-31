@@ -145,10 +145,10 @@ class MSP_RedemptionSubmissionVC: BaseViewController, popUpDelegate,UITextFieldD
                         "ActorId": userID,
                         "MemberName": "\(self.customerName)",
                         "ObjCatalogueDetails": [
-                              "DomainName": "MSP"
+                              "DomainName": "JSW"
                           ],
                         "ObjCatalogueList": self.newproductArray as [[String: Any]],
-                        "ObjCustShippingAddressDetails":["Address1":"\(self.address1)","CityId":"\(self.cityID)", "CityName":"\(self.cityName)","CountryId":"\(self.countryId)","StateName": "\(self.stateName)","StateId":"\(self.stateID)","Zip":"\(self.pincode)","Email":"\(self.emailId)","FullName":"\(self.customerName)","Mobile": self.mobile],"SourceMode":5
+                        "ObjCustShippingAddressDetails":["Address1":"\(self.address1)","Districid":"\(self.cityID)", "CityName":"\(self.cityName)","CountryId":"\(self.countryId)","StateName": "\(self.stateName)","StateId":"\(self.stateID)","Zip":"\(self.pincode)","Email":"\(self.emailId)","FullName":"\(self.customerName)","Mobile": self.mobile],"SourceMode":5
                     ]
                     print(productsParameter ?? [])
                 }else{
@@ -157,7 +157,7 @@ class MSP_RedemptionSubmissionVC: BaseViewController, popUpDelegate,UITextFieldD
                         "ActorId": userID,
                         "MemberName": "\(contractorName)",
                         "ObjCatalogueDetails": [
-                               "DomainName": "MSP"
+                               "DomainName": "JSW"
                            ],
                         "ObjCatalogueList": [
                             [
